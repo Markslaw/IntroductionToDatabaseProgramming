@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="902e2bd5fb314196b2573e650dcee856" Name="Diagram1">
+        <EntityTypeShape EntityType="HotelModel.ADMIN" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.CUSTOMER" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.RESERVATION" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.ROOMRATE" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.ROOM" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.ALL_CHECK_INS_TODAY" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.AQ__DEF__AQCALL_F" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.AQ__DEF__AQERROR_F" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.AQ_DEF__AQCALL" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.AQ_DEF__AQERROR" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.CHECK_DELETE_VALID_RES" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.CHECK_OUT_VIEW" Width="1.5" PointX="11.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.DELETERESERVATION_VIEW" Width="1.5" PointX="11.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.GET_ALL_DETAILS_FOR_CANCEL" Width="1.5" PointX="11.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.GET_CUST_NAME_FOR_CANCEL" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.MVIEW_EVALUATIONS" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.MVIEW_FILTER" Width="1.5" PointX="4.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.MVIEW_FILTERINSTANCE" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.MVIEW_LOG" Width="1.5" PointX="13.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.MVIEW_RECOMMENDATIONS" Width="1.5" PointX="13.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.MVIEW_WORKLOAD" Width="1.5" PointX="11.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.PRODUCT_PRIVS" Width="1.5" PointX="13.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.ROOMS_NOT_CURRENTLY_IN_USE" Width="1.5" PointX="6.75" PointY="14.75" IsExpanded="true" />
+        <AssociationConnector Association="HotelModel.FK_RESERVATIONS_ADMINS" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelModel.FK_RESERVATIONS_CUSTOMERS" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelModel.FK_RESERVATIONS_ROOMS" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelModel.FK_ROOMS_ROOMRATES" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HotelModel.SIMPLERIIMRATE" Width="1.5" PointX="16.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

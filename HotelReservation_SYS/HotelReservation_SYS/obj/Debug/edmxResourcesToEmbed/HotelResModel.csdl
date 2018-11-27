@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HotelResModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ADMIN">
+    <Key>
+      <PropertyRef Name="ADMIN_ID" />
+    </Key>
+    <Property Name="ADMIN_ID" Type="Byte" Nullable="false" />
+    <Property Name="USERNAME" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FAILED_ATTEMPTS" Type="Boolean" />
+    <Property Name="BLOCK_TIME" Type="DateTime" Precision="6" />
+    <NavigationProperty Name="RESERVATIONS" Relationship="Self.FK_RESERVATIONS_ADMINS" FromRole="ADMINS" ToRole="RESERVATIONS" />
+  </EntityType>
+  <EntityType Name="CUSTOMER">
+    <Key>
+      <PropertyRef Name="CUST_ID" />
+    </Key>
+    <Property Name="CUST_ID" Type="Int32" Nullable="false" />
+    <Property Name="FORENAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SURNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="MOBILE_NO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="LOYALTY" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="RESERVATIONS" Relationship="Self.FK_RESERVATIONS_CUSTOMERS" FromRole="CUSTOMERS" ToRole="RESERVATIONS" />
+  </EntityType>
+  <EntityType Name="RESERVATION">
+    <Key>
+      <PropertyRef Name="RES_ID" />
+    </Key>
+    <Property Name="RES_ID" Type="Int32" Nullable="false" />
+    <Property Name="ROOM_NO" Type="Byte" Nullable="false" />
+    <Property Name="ADMIN_ID" Type="Byte" Nullable="false" />
+    <Property Name="CUST_ID" Type="Int32" Nullable="false" />
+    <Property Name="DATE_ARRIVE" Type="DateTime" Nullable="false" />
+    <Property Name="DATE_DEPART" Type="DateTime" Nullable="false" />
+    <Property Name="TOTAL_COST" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="CHECK_IN" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CHECK_OUT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RES_STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ADMIN" Relationship="Self.FK_RESERVATIONS_ADMINS" FromRole="RESERVATIONS" ToRole="ADMINS" />
+    <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_RESERVATIONS_CUSTOMERS" FromRole="RESERVATIONS" ToRole="CUSTOMERS" />
+    <NavigationProperty Name="ROOM" Relationship="Self.FK_RESERVATIONS_ROOMS" FromRole="RESERVATIONS" ToRole="ROOMS" />
+  </EntityType>
+  <EntityType Name="ROOMRATE">
+    <Key>
+      <PropertyRef Name="ROOM_TYPE" />
+    </Key>
+    <Property Name="ROOM_TYPE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RATE" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+    <NavigationProperty Name="ROOMS" Relationship="Self.FK_ROOMS_ROOMRATES" FromRole="ROOMRATES" ToRole="ROOMS" />
+  </EntityType>
+  <EntityType Name="ROOM">
+    <Key>
+      <PropertyRef Name="ROOM_NO" />
+    </Key>
+    <Property Name="ROOM_NO" Type="Byte" Nullable="false" />
+    <Property Name="ROOM_TYPE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="RESERVATIONS" Relationship="Self.FK_RESERVATIONS_ROOMS" FromRole="ROOMS" ToRole="RESERVATIONS" />
+    <NavigationProperty Name="ROOMRATE" Relationship="Self.FK_ROOMS_ROOMRATES" FromRole="ROOMS" ToRole="ROOMRATES" />
+  </EntityType>
+  <EntityType Name="ALL_CHECK_INS_TODAY">
+    <Key>
+      <PropertyRef Name="RES_ID" />
+      <PropertyRef Name="ROOM_NO" />
+      <PropertyRef Name="ADMIN_ID" />
+      <PropertyRef Name="CUST_ID" />
+      <PropertyRef Name="DATE_ARRIVE" />
+      <PropertyRef Name="DATE_DEPART" />
+      <PropertyRef Name="TOTAL_COST" />
+      <PropertyRef Name="CHECK_IN" />
+      <PropertyRef Name="CHECK_OUT" />
+      <PropertyRef Name="RES_STATUS" />
+    </Key>
+    <Property Name="RES_ID" Type="Int32" Nullable="false" />
+    <Property Name="ROOM_NO" Type="Byte" Nullable="false" />
+    <Property Name="ADMIN_ID" Type="Byte" Nullable="false" />
+    <Property Name="CUST_ID" Type="Int32" Nullable="false" />
+    <Property Name="DATE_ARRIVE" Type="DateTime" Nullable="false" />
+    <Property Name="DATE_DEPART" Type="DateTime" Nullable="false" />
+    <Property Name="TOTAL_COST" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="CHECK_IN" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CHECK_OUT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RES_STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AQ__DEF__AQCALL_F">
+    <Key>
+      <PropertyRef Name="ENQ_TID" />
+      <PropertyRef Name="STEP_NO" />
+      <PropertyRef Name="QUEUE_ID" />
+    </Key>
+    <Property Name="Q_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ROW_ID" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+    <Property Name="MSGID" Type="Guid" />
+    <Property Name="CORRID" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="PRIORITY" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="STATE" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="DELAY" Type="DateTime" Precision="6" />
+    <Property Name="EXPIRATION" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ENQ_TIME" Type="DateTime" Precision="6" />
+    <Property Name="ENQ_UID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ENQ_TID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DEQ_TIME" Type="DateTime" Precision="6" />
+    <Property Name="DEQ_UID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="DEQ_TID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="RETRY_COUNT" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="EXCEPTION_QSCHEMA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="EXCEPTION_QUEUE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CSCN" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="DSCN" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="CHAIN_NO" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="LOCAL_ORDER_NO" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="TIME_MANAGER_INFO" Type="DateTime" Precision="6" />
+    <Property Name="STEP_NO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="USER_DATA" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="QUEUE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AQ__DEF__AQERROR_F">
+    <Key>
+      <PropertyRef Name="ENQ_TID" />
+      <PropertyRef Name="STEP_NO" />
+      <PropertyRef Name="QUEUE_ID" />
+    </Key>
+    <Property Name="Q_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ROW_ID" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+    <Property Name="MSGID" Type="Guid" />
+    <Property Name="CORRID" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="PRIORITY" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="STATE" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="DELAY" Type="DateTime" Precision="6" />
+    <Property Name="EXPIRATION" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ENQ_TIME" Type="DateTime" Precision="6" />
+    <Property Name="ENQ_UID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ENQ_TID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DEQ_TIME" Type="DateTime" Precision="6" />
+    <Property Name="DEQ_UID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="DEQ_TID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="RETRY_COUNT" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="EXCEPTION_QSCHEMA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="EXCEPTION_QUEUE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CSCN" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="DSCN" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="CHAIN_NO" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="LOCAL_ORDER_NO" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="TIME_MANAGER_INFO" Type="DateTime" Precision="6" />
+    <Property Name="STEP_NO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="USER_DATA" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="QUEUE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AQ_DEF__AQCALL">
+    <Key>
+      <PropertyRef Name="ENQ_TXN_ID" />
+    </Key>
+    <Property Name="QUEUE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="MSG_ID" Type="Guid" />
+    <Property Name="CORR_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="MSG_PRIORITY" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="MSG_STATE" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="DELAY" Type="DateTime" />
+    <Property Name="DELAY_TIMESTAMP" Type="DateTime" Precision="6" />
+    <Property Name="EXPIRATION" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ENQ_TIME" Type="DateTime" />
+    <Property Name="ENQ_TIMESTAMP" Type="DateTime" Precision="6" />
+    <Property Name="ENQ_USER_ID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ENQ_TXN_ID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DEQ_TIME" Type="DateTime" />
+    <Property Name="DEQ_TIMESTAMP" Type="DateTime" Precision="6" />
+    <Property Name="DEQ_USER_ID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="DEQ_TXN_ID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="RETRY_COUNT" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="EXCEPTION_QUEUE_OWNER" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="EXCEPTION_QUEUE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="USER_DATA" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ORIGINAL_QUEUE_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ORIGINAL_QUEUE_OWNER" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="EXPIRATION_REASON" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="AQ_DEF__AQERROR">
+    <Key>
+      <PropertyRef Name="ENQ_TXN_ID" />
+    </Key>
+    <Property Name="QUEUE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="MSG_ID" Type="Guid" />
+    <Property Name="CORR_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="MSG_PRIORITY" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="MSG_STATE" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="DELAY" Type="DateTime" />
+    <Property Name="DELAY_TIMESTAMP" Type="DateTime" Precision="6" />
+    <Property Name="EXPIRATION" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ENQ_TIME" Type="DateTime" />
+    <Property Name="ENQ_TIMESTAMP" Type="DateTime" Precision="6" />
+    <Property Name="ENQ_USER_ID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ENQ_TXN_ID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DEQ_TIME" Type="DateTime" />
+    <Property Name="DEQ_TIMESTAMP" Type="DateTime" Precision="6" />
+    <Property Name="DEQ_USER_ID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="DEQ_TXN_ID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="RETRY_COUNT" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="EXCEPTION_QUEUE_OWNER" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="EXCEPTION_QUEUE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="USER_DATA" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ORIGINAL_QUEUE_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ORIGINAL_QUEUE_OWNER" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="EXPIRATION_REASON" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CHECK_DELETE_VALID_RES">
+    <Key>
+      <PropertyRef Name="RES_ID" />
+      <PropertyRef Name="ROOM_NO" />
+      <PropertyRef Name="ADMIN_ID" />
+      <PropertyRef Name="CUST_ID" />
+      <PropertyRef Name="DATE_ARRIVE" />
+      <PropertyRef Name="DATE_DEPART" />
+      <PropertyRef Name="TOTAL_COST" />
+      <PropertyRef Name="CHECK_IN" />
+      <PropertyRef Name="CHECK_OUT" />
+      <PropertyRef Name="RES_STATUS" />
+    </Key>
+    <Property Name="RES_ID" Type="Int32" Nullable="false" />
+    <Property Name="ROOM_NO" Type="Byte" Nullable="false" />
+    <Property Name="ADMIN_ID" Type="Byte" Nullable="false" />
+    <Property Name="CUST_ID" Type="Int32" Nullable="false" />
+    <Property Name="DATE_ARRIVE" Type="DateTime" Nullable="false" />
+    <Property Name="DATE_DEPART" Type="DateTime" Nullable="false" />
+    <Property Name="TOTAL_COST" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="CHECK_IN" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CHECK_OUT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RES_STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CHECK_OUT_VIEW">
+    <Key>
+      <PropertyRef Name="RES_ID" />
+      <PropertyRef Name="FORENAME" />
+      <PropertyRef Name="SURNAME" />
+    </Key>
+    <Property Name="RES_ID" Type="Int32" Nullable="false" />
+    <Property Name="FORENAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SURNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DELETERESERVATION_VIEW">
+    <Key>
+      <PropertyRef Name="RES_ID" />
+      <PropertyRef Name="FORENAME" />
+      <PropertyRef Name="SURNAME" />
+    </Key>
+    <Property Name="RES_ID" Type="Int32" Nullable="false" />
+    <Property Name="FORENAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SURNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GET_ALL_DETAILS_FOR_CANCEL">
+    <Key>
+      <PropertyRef Name="RES_ID" />
+      <PropertyRef Name="FORENAME" />
+      <PropertyRef Name="SURNAME" />
+      <PropertyRef Name="DATE_ARRIVE" />
+      <PropertyRef Name="DATE_DEPART" />
+    </Key>
+    <Property Name="RES_ID" Type="Int32" Nullable="false" />
+    <Property Name="FORENAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SURNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DATE_ARRIVE" Type="DateTime" Nullable="false" />
+    <Property Name="DATE_DEPART" Type="DateTime" Nullable="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="GET_CUST_NAME_FOR_CANCEL">
+    <Key>
+      <PropertyRef Name="RES_ID" />
+      <PropertyRef Name="FORENAME" />
+      <PropertyRef Name="SURNAME" />
+    </Key>
+    <Property Name="RES_ID" Type="Int32" Nullable="false" />
+    <Property Name="FORENAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SURNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MVIEW_EVALUATIONS">
+    <Key>
+      <PropertyRef Name="RUNID" />
+      <PropertyRef Name="RANK" />
+      <PropertyRef Name="BENEFIT_TO_COST_RATIO" />
+    </Key>
+    <Property Name="RUNID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="MVIEW_OWNER" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="MVIEW_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="RANK" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="STORAGE_IN_BYTES" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="FREQUENCY" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="CUMULATIVE_BENEFIT" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="BENEFIT_TO_COST_RATIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MVIEW_FILTER">
+    <Key>
+      <PropertyRef Name="FILTERID" />
+      <PropertyRef Name="SUBFILTERNUM" />
+    </Key>
+    <Property Name="FILTERID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="SUBFILTERNUM" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="SUBFILTERTYPE" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="STR_VALUE" Type="String" MaxLength="1028" FixedLength="false" Unicode="false" />
+    <Property Name="NUM_VALUE1" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="NUM_VALUE2" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="DATE_VALUE1" Type="DateTime" />
+    <Property Name="DATE_VALUE2" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="MVIEW_FILTERINSTANCE">
+    <Key>
+      <PropertyRef Name="RUNID" />
+    </Key>
+    <Property Name="RUNID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="FILTERID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="SUBFILTERNUM" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="SUBFILTERTYPE" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="STR_VALUE" Type="String" MaxLength="1028" FixedLength="false" Unicode="false" />
+    <Property Name="NUM_VALUE1" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="NUM_VALUE2" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="DATE_VALUE1" Type="DateTime" />
+    <Property Name="DATE_VALUE2" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="MVIEW_LOG">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="FILTERID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="RUN_BEGIN" Type="DateTime" />
+    <Property Name="RUN_END" Type="DateTime" />
+    <Property Name="TYPE" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="MESSAGE" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="COMPLETED" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="TOTAL" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ERROR_CODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="MVIEW_RECOMMENDATIONS">
+    <Key>
+      <PropertyRef Name="RUNID" />
+      <PropertyRef Name="RECOMMENDATION_NUMBER" />
+      <PropertyRef Name="BENEFIT_TO_COST_RATIO" />
+    </Key>
+    <Property Name="RUNID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ALL_TABLES" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="FACT_TABLES" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="GROUPING_LEVELS" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="QUERY_TEXT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="RECOMMENDATION_NUMBER" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="RECOMMENDED_ACTION" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="MVIEW_OWNER" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="MVIEW_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="STORAGE_IN_BYTES" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="PCT_PERFORMANCE_GAIN" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="BENEFIT_TO_COST_RATIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MVIEW_WORKLOAD">
+    <Key>
+      <PropertyRef Name="WORKLOADID" />
+      <PropertyRef Name="IMPORT_TIME" />
+      <PropertyRef Name="QUERYID" />
+      <PropertyRef Name="OWNER" />
+      <PropertyRef Name="QUERY" />
+    </Key>
+    <Property Name="WORKLOADID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IMPORT_TIME" Type="DateTime" Nullable="false" />
+    <Property Name="QUERYID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="APPLICATION" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="CARDINALITY" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="RESULTSIZE" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="LASTUSE" Type="DateTime" />
+    <Property Name="FREQUENCY" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="OWNER" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PRIORITY" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="QUERY" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RESPONSETIME" Type="Decimal" Precision="38" Scale="0" />
+  </EntityType>
+  <EntityType Name="PRODUCT_PRIVS">
+    <Key>
+      <PropertyRef Name="PRODUCT" />
+    </Key>
+    <Property Name="PRODUCT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="USERID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ATTRIBUTE" Type="String" MaxLength="240" FixedLength="false" Unicode="false" />
+    <Property Name="SCOPE" Type="String" MaxLength="240" FixedLength="false" Unicode="false" />
+    <Property Name="NUMERIC_VALUE" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="CHAR_VALUE" Type="String" MaxLength="240" FixedLength="false" Unicode="false" />
+    <Property Name="DATE_VALUE" Type="DateTime" />
+    <Property Name="LONG_VALUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ROOMS_NOT_CURRENTLY_IN_USE">
+    <Key>
+      <PropertyRef Name="ROOM_NO" />
+      <PropertyRef Name="ROOM_TYPE" />
+      <PropertyRef Name="STATUS" />
+    </Key>
+    <Property Name="ROOM_NO" Type="Byte" Nullable="false" />
+    <Property Name="ROOM_TYPE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_RESERVATIONS_ADMINS">
+    <End Role="ADMINS" Type="Self.ADMIN" Multiplicity="1" />
+    <End Role="RESERVATIONS" Type="Self.RESERVATION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ADMINS">
+        <PropertyRef Name="ADMIN_ID" />
+      </Principal>
+      <Dependent Role="RESERVATIONS">
+        <PropertyRef Name="ADMIN_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RESERVATIONS_CUSTOMERS">
+    <End Role="CUSTOMERS" Type="Self.CUSTOMER" Multiplicity="1" />
+    <End Role="RESERVATIONS" Type="Self.RESERVATION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMERS">
+        <PropertyRef Name="CUST_ID" />
+      </Principal>
+      <Dependent Role="RESERVATIONS">
+        <PropertyRef Name="CUST_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RESERVATIONS_ROOMS">
+    <End Role="ROOMS" Type="Self.ROOM" Multiplicity="1" />
+    <End Role="RESERVATIONS" Type="Self.RESERVATION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROOMS">
+        <PropertyRef Name="ROOM_NO" />
+      </Principal>
+      <Dependent Role="RESERVATIONS">
+        <PropertyRef Name="ROOM_NO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ROOMS_ROOMRATES">
+    <End Role="ROOMRATES" Type="Self.ROOMRATE" Multiplicity="1" />
+    <End Role="ROOMS" Type="Self.ROOM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROOMRATES">
+        <PropertyRef Name="ROOM_TYPE" />
+      </Principal>
+      <Dependent Role="ROOMS">
+        <PropertyRef Name="ROOM_TYPE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HotelResEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ADMINS" EntityType="Self.ADMIN" />
+    <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMER" />
+    <EntitySet Name="RESERVATIONS" EntityType="Self.RESERVATION" />
+    <EntitySet Name="ROOMRATES" EntityType="Self.ROOMRATE" />
+    <EntitySet Name="ROOMS" EntityType="Self.ROOM" />
+    <EntitySet Name="ALL_CHECK_INS_TODAY" EntityType="Self.ALL_CHECK_INS_TODAY" />
+    <EntitySet Name="AQ__DEF__AQCALL_F" EntityType="Self.AQ__DEF__AQCALL_F" />
+    <EntitySet Name="AQ__DEF__AQERROR_F" EntityType="Self.AQ__DEF__AQERROR_F" />
+    <EntitySet Name="AQ_DEF__AQCALL" EntityType="Self.AQ_DEF__AQCALL" />
+    <EntitySet Name="AQ_DEF__AQERROR" EntityType="Self.AQ_DEF__AQERROR" />
+    <EntitySet Name="CHECK_DELETE_VALID_RES" EntityType="Self.CHECK_DELETE_VALID_RES" />
+    <EntitySet Name="CHECK_OUT_VIEW" EntityType="Self.CHECK_OUT_VIEW" />
+    <EntitySet Name="DELETERESERVATION_VIEW" EntityType="Self.DELETERESERVATION_VIEW" />
+    <EntitySet Name="GET_ALL_DETAILS_FOR_CANCEL" EntityType="Self.GET_ALL_DETAILS_FOR_CANCEL" />
+    <EntitySet Name="GET_CUST_NAME_FOR_CANCEL" EntityType="Self.GET_CUST_NAME_FOR_CANCEL" />
+    <EntitySet Name="MVIEW_EVALUATIONS" EntityType="Self.MVIEW_EVALUATIONS" />
+    <EntitySet Name="MVIEW_FILTER" EntityType="Self.MVIEW_FILTER" />
+    <EntitySet Name="MVIEW_FILTERINSTANCE" EntityType="Self.MVIEW_FILTERINSTANCE" />
+    <EntitySet Name="MVIEW_LOG" EntityType="Self.MVIEW_LOG" />
+    <EntitySet Name="MVIEW_RECOMMENDATIONS" EntityType="Self.MVIEW_RECOMMENDATIONS" />
+    <EntitySet Name="MVIEW_WORKLOAD" EntityType="Self.MVIEW_WORKLOAD" />
+    <EntitySet Name="PRODUCT_PRIVS" EntityType="Self.PRODUCT_PRIVS" />
+    <EntitySet Name="ROOMS_NOT_CURRENTLY_IN_USE" EntityType="Self.ROOMS_NOT_CURRENTLY_IN_USE" />
+    <AssociationSet Name="FK_RESERVATIONS_ADMINS" Association="Self.FK_RESERVATIONS_ADMINS">
+      <End Role="ADMINS" EntitySet="ADMINS" />
+      <End Role="RESERVATIONS" EntitySet="RESERVATIONS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RESERVATIONS_CUSTOMERS" Association="Self.FK_RESERVATIONS_CUSTOMERS">
+      <End Role="CUSTOMERS" EntitySet="CUSTOMERS" />
+      <End Role="RESERVATIONS" EntitySet="RESERVATIONS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RESERVATIONS_ROOMS" Association="Self.FK_RESERVATIONS_ROOMS">
+      <End Role="ROOMS" EntitySet="ROOMS" />
+      <End Role="RESERVATIONS" EntitySet="RESERVATIONS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ROOMS_ROOMRATES" Association="Self.FK_ROOMS_ROOMRATES">
+      <End Role="ROOMRATES" EntitySet="ROOMRATES" />
+      <End Role="ROOMS" EntitySet="ROOMS" />
+    </AssociationSet>
+    <FunctionImport Name="ADD_ROOM">
+      <Parameter Name="R_ROOM_NO" Mode="In" Type="Decimal" />
+      <Parameter Name="R_ROOM_TYPE" Mode="In" Type="String" />
+      <Parameter Name="R_STATUS" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ADD_ROOM_RATE">
+      <Parameter Name="R_ROOM_TYPE" Mode="In" Type="String" />
+      <Parameter Name="R_DESCRIPTION" Mode="In" Type="String" />
+      <Parameter Name="R_RATE" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="ADMIN_LOGIN_CHECK">
+      <Parameter Name="GET_ENTERED_USERNAME" Mode="In" Type="String" />
+      <Parameter Name="GET_ENTERED_PASSWORD" Mode="In" Type="String" />
+      <Parameter Name="GET_EXISTING_USERNAME" Mode="Out" Type="String" />
+      <Parameter Name="GET_EXISTING_PASSWORD" Mode="Out" Type="String" />
+      <Parameter Name="GET_FAILED_ATTEMPTS" Mode="InOut" Type="Decimal" />
+      <Parameter Name="GET_BLOCKTIME" Mode="Out" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="CANCEL_RESERVATION">
+      <Parameter Name="R_OUTPUT_RES_ID" Mode="Out" Type="Decimal" />
+      <Parameter Name="R_INPUT_RES_ID" Mode="In" Type="Decimal" />
+      <Parameter Name="R_DATE_DEPART" Mode="Out" Type="DateTime" />
+      <Parameter Name="R_DATE_ARRIVE" Mode="Out" Type="DateTime" />
+      <Parameter Name="C_SURNAME" Mode="Out" Type="String" />
+      <Parameter Name="C_FORENAME" Mode="Out" Type="String" />
+      <Parameter Name="C_EMAIL" Mode="Out" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CHECK_IN">
+      <Parameter Name="RE_RES_ID" Mode="In" Type="Decimal" />
+      <Parameter Name="RE_CHECK_IN" Mode="In" Type="String" />
+      <Parameter Name="R_RES_ID" Mode="Out" Type="Decimal" />
+      <Parameter Name="C_FORENAME" Mode="Out" Type="String" />
+      <Parameter Name="C_SURNAME" Mode="Out" Type="String" />
+      <Parameter Name="R_DATE_ARRIVE" Mode="Out" Type="DateTime" />
+      <Parameter Name="R_DATE_DEPART" Mode="Out" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="CHECK_OUT">
+      <Parameter Name="RE_RES_ID" Mode="In" Type="Decimal" />
+      <Parameter Name="R_RES_ID" Mode="Out" Type="Decimal" />
+      <Parameter Name="C_FORENAME" Mode="Out" Type="String" />
+      <Parameter Name="C_SURNAME" Mode="Out" Type="String" />
+      <Parameter Name="R_DATE_ARRIVE" Mode="Out" Type="DateTime" />
+      <Parameter Name="R_DATE_DEPART" Mode="Out" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

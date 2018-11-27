@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HotelResModelStoreContainer" CdmEntityContainer="HotelResEntities">
+    <EntitySetMapping Name="ADMINS">
+      <EntityTypeMapping TypeName="HotelResModel.ADMIN">
+        <MappingFragment StoreEntitySet="ADMINS">
+          <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="FAILED_ATTEMPTS" ColumnName="FAILED_ATTEMPTS" />
+          <ScalarProperty Name="BLOCK_TIME" ColumnName="BLOCK_TIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CUSTOMERS">
+      <EntityTypeMapping TypeName="HotelResModel.CUSTOMER">
+        <MappingFragment StoreEntitySet="CUSTOMERS">
+          <ScalarProperty Name="CUST_ID" ColumnName="CUST_ID" />
+          <ScalarProperty Name="FORENAME" ColumnName="FORENAME" />
+          <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="MOBILE_NO" ColumnName="MOBILE_NO" />
+          <ScalarProperty Name="LOYALTY" ColumnName="LOYALTY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RESERVATIONS">
+      <EntityTypeMapping TypeName="HotelResModel.RESERVATION">
+        <MappingFragment StoreEntitySet="RESERVATIONS">
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="ROOM_NO" ColumnName="ROOM_NO" />
+          <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+          <ScalarProperty Name="CUST_ID" ColumnName="CUST_ID" />
+          <ScalarProperty Name="DATE_ARRIVE" ColumnName="DATE_ARRIVE" />
+          <ScalarProperty Name="DATE_DEPART" ColumnName="DATE_DEPART" />
+          <ScalarProperty Name="TOTAL_COST" ColumnName="TOTAL_COST" />
+          <ScalarProperty Name="CHECK_IN" ColumnName="CHECK_IN" />
+          <ScalarProperty Name="CHECK_OUT" ColumnName="CHECK_OUT" />
+          <ScalarProperty Name="RES_STATUS" ColumnName="RES_STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ROOMRATES">
+      <EntityTypeMapping TypeName="HotelResModel.ROOMRATE">
+        <MappingFragment StoreEntitySet="ROOMRATES">
+          <ScalarProperty Name="ROOM_TYPE" ColumnName="ROOM_TYPE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="RATE" ColumnName="RATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ROOMS">
+      <EntityTypeMapping TypeName="HotelResModel.ROOM">
+        <MappingFragment StoreEntitySet="ROOMS">
+          <ScalarProperty Name="ROOM_NO" ColumnName="ROOM_NO" />
+          <ScalarProperty Name="ROOM_TYPE" ColumnName="ROOM_TYPE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ALL_CHECK_INS_TODAY">
+      <EntityTypeMapping TypeName="HotelResModel.ALL_CHECK_INS_TODAY">
+        <MappingFragment StoreEntitySet="ALL_CHECK_INS_TODAY">
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="ROOM_NO" ColumnName="ROOM_NO" />
+          <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+          <ScalarProperty Name="CUST_ID" ColumnName="CUST_ID" />
+          <ScalarProperty Name="DATE_ARRIVE" ColumnName="DATE_ARRIVE" />
+          <ScalarProperty Name="DATE_DEPART" ColumnName="DATE_DEPART" />
+          <ScalarProperty Name="TOTAL_COST" ColumnName="TOTAL_COST" />
+          <ScalarProperty Name="CHECK_IN" ColumnName="CHECK_IN" />
+          <ScalarProperty Name="CHECK_OUT" ColumnName="CHECK_OUT" />
+          <ScalarProperty Name="RES_STATUS" ColumnName="RES_STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AQ__DEF__AQCALL_F">
+      <EntityTypeMapping TypeName="HotelResModel.AQ__DEF__AQCALL_F">
+        <MappingFragment StoreEntitySet="AQ$_DEF$_AQCALL_F">
+          <ScalarProperty Name="Q_NAME" ColumnName="Q_NAME" />
+          <ScalarProperty Name="ROW_ID" ColumnName="ROW_ID" />
+          <ScalarProperty Name="MSGID" ColumnName="MSGID" />
+          <ScalarProperty Name="CORRID" ColumnName="CORRID" />
+          <ScalarProperty Name="PRIORITY" ColumnName="PRIORITY" />
+          <ScalarProperty Name="STATE" ColumnName="STATE" />
+          <ScalarProperty Name="DELAY" ColumnName="DELAY" />
+          <ScalarProperty Name="EXPIRATION" ColumnName="EXPIRATION" />
+          <ScalarProperty Name="ENQ_TIME" ColumnName="ENQ_TIME" />
+          <ScalarProperty Name="ENQ_UID" ColumnName="ENQ_UID" />
+          <ScalarProperty Name="ENQ_TID" ColumnName="ENQ_TID" />
+          <ScalarProperty Name="DEQ_TIME" ColumnName="DEQ_TIME" />
+          <ScalarProperty Name="DEQ_UID" ColumnName="DEQ_UID" />
+          <ScalarProperty Name="DEQ_TID" ColumnName="DEQ_TID" />
+          <ScalarProperty Name="RETRY_COUNT" ColumnName="RETRY_COUNT" />
+          <ScalarProperty Name="EXCEPTION_QSCHEMA" ColumnName="EXCEPTION_QSCHEMA" />
+          <ScalarProperty Name="EXCEPTION_QUEUE" ColumnName="EXCEPTION_QUEUE" />
+          <ScalarProperty Name="CSCN" ColumnName="CSCN" />
+          <ScalarProperty Name="DSCN" ColumnName="DSCN" />
+          <ScalarProperty Name="CHAIN_NO" ColumnName="CHAIN_NO" />
+          <ScalarProperty Name="LOCAL_ORDER_NO" ColumnName="LOCAL_ORDER_NO" />
+          <ScalarProperty Name="TIME_MANAGER_INFO" ColumnName="TIME_MANAGER_INFO" />
+          <ScalarProperty Name="STEP_NO" ColumnName="STEP_NO" />
+          <ScalarProperty Name="USER_DATA" ColumnName="USER_DATA" />
+          <ScalarProperty Name="QUEUE_ID" ColumnName="QUEUE_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AQ__DEF__AQERROR_F">
+      <EntityTypeMapping TypeName="HotelResModel.AQ__DEF__AQERROR_F">
+        <MappingFragment StoreEntitySet="AQ$_DEF$_AQERROR_F">
+          <ScalarProperty Name="Q_NAME" ColumnName="Q_NAME" />
+          <ScalarProperty Name="ROW_ID" ColumnName="ROW_ID" />
+          <ScalarProperty Name="MSGID" ColumnName="MSGID" />
+          <ScalarProperty Name="CORRID" ColumnName="CORRID" />
+          <ScalarProperty Name="PRIORITY" ColumnName="PRIORITY" />
+          <ScalarProperty Name="STATE" ColumnName="STATE" />
+          <ScalarProperty Name="DELAY" ColumnName="DELAY" />
+          <ScalarProperty Name="EXPIRATION" ColumnName="EXPIRATION" />
+          <ScalarProperty Name="ENQ_TIME" ColumnName="ENQ_TIME" />
+          <ScalarProperty Name="ENQ_UID" ColumnName="ENQ_UID" />
+          <ScalarProperty Name="ENQ_TID" ColumnName="ENQ_TID" />
+          <ScalarProperty Name="DEQ_TIME" ColumnName="DEQ_TIME" />
+          <ScalarProperty Name="DEQ_UID" ColumnName="DEQ_UID" />
+          <ScalarProperty Name="DEQ_TID" ColumnName="DEQ_TID" />
+          <ScalarProperty Name="RETRY_COUNT" ColumnName="RETRY_COUNT" />
+          <ScalarProperty Name="EXCEPTION_QSCHEMA" ColumnName="EXCEPTION_QSCHEMA" />
+          <ScalarProperty Name="EXCEPTION_QUEUE" ColumnName="EXCEPTION_QUEUE" />
+          <ScalarProperty Name="CSCN" ColumnName="CSCN" />
+          <ScalarProperty Name="DSCN" ColumnName="DSCN" />
+          <ScalarProperty Name="CHAIN_NO" ColumnName="CHAIN_NO" />
+          <ScalarProperty Name="LOCAL_ORDER_NO" ColumnName="LOCAL_ORDER_NO" />
+          <ScalarProperty Name="TIME_MANAGER_INFO" ColumnName="TIME_MANAGER_INFO" />
+          <ScalarProperty Name="STEP_NO" ColumnName="STEP_NO" />
+          <ScalarProperty Name="USER_DATA" ColumnName="USER_DATA" />
+          <ScalarProperty Name="QUEUE_ID" ColumnName="QUEUE_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AQ_DEF__AQCALL">
+      <EntityTypeMapping TypeName="HotelResModel.AQ_DEF__AQCALL">
+        <MappingFragment StoreEntitySet="AQ$DEF$_AQCALL">
+          <ScalarProperty Name="QUEUE" ColumnName="QUEUE" />
+          <ScalarProperty Name="MSG_ID" ColumnName="MSG_ID" />
+          <ScalarProperty Name="CORR_ID" ColumnName="CORR_ID" />
+          <ScalarProperty Name="MSG_PRIORITY" ColumnName="MSG_PRIORITY" />
+          <ScalarProperty Name="MSG_STATE" ColumnName="MSG_STATE" />
+          <ScalarProperty Name="DELAY" ColumnName="DELAY" />
+          <ScalarProperty Name="DELAY_TIMESTAMP" ColumnName="DELAY_TIMESTAMP" />
+          <ScalarProperty Name="EXPIRATION" ColumnName="EXPIRATION" />
+          <ScalarProperty Name="ENQ_TIME" ColumnName="ENQ_TIME" />
+          <ScalarProperty Name="ENQ_TIMESTAMP" ColumnName="ENQ_TIMESTAMP" />
+          <ScalarProperty Name="ENQ_USER_ID" ColumnName="ENQ_USER_ID" />
+          <ScalarProperty Name="ENQ_TXN_ID" ColumnName="ENQ_TXN_ID" />
+          <ScalarProperty Name="DEQ_TIME" ColumnName="DEQ_TIME" />
+          <ScalarProperty Name="DEQ_TIMESTAMP" ColumnName="DEQ_TIMESTAMP" />
+          <ScalarProperty Name="DEQ_USER_ID" ColumnName="DEQ_USER_ID" />
+          <ScalarProperty Name="DEQ_TXN_ID" ColumnName="DEQ_TXN_ID" />
+          <ScalarProperty Name="RETRY_COUNT" ColumnName="RETRY_COUNT" />
+          <ScalarProperty Name="EXCEPTION_QUEUE_OWNER" ColumnName="EXCEPTION_QUEUE_OWNER" />
+          <ScalarProperty Name="EXCEPTION_QUEUE" ColumnName="EXCEPTION_QUEUE" />
+          <ScalarProperty Name="USER_DATA" ColumnName="USER_DATA" />
+          <ScalarProperty Name="ORIGINAL_QUEUE_NAME" ColumnName="ORIGINAL_QUEUE_NAME" />
+          <ScalarProperty Name="ORIGINAL_QUEUE_OWNER" ColumnName="ORIGINAL_QUEUE_OWNER" />
+          <ScalarProperty Name="EXPIRATION_REASON" ColumnName="EXPIRATION_REASON" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AQ_DEF__AQERROR">
+      <EntityTypeMapping TypeName="HotelResModel.AQ_DEF__AQERROR">
+        <MappingFragment StoreEntitySet="AQ$DEF$_AQERROR">
+          <ScalarProperty Name="QUEUE" ColumnName="QUEUE" />
+          <ScalarProperty Name="MSG_ID" ColumnName="MSG_ID" />
+          <ScalarProperty Name="CORR_ID" ColumnName="CORR_ID" />
+          <ScalarProperty Name="MSG_PRIORITY" ColumnName="MSG_PRIORITY" />
+          <ScalarProperty Name="MSG_STATE" ColumnName="MSG_STATE" />
+          <ScalarProperty Name="DELAY" ColumnName="DELAY" />
+          <ScalarProperty Name="DELAY_TIMESTAMP" ColumnName="DELAY_TIMESTAMP" />
+          <ScalarProperty Name="EXPIRATION" ColumnName="EXPIRATION" />
+          <ScalarProperty Name="ENQ_TIME" ColumnName="ENQ_TIME" />
+          <ScalarProperty Name="ENQ_TIMESTAMP" ColumnName="ENQ_TIMESTAMP" />
+          <ScalarProperty Name="ENQ_USER_ID" ColumnName="ENQ_USER_ID" />
+          <ScalarProperty Name="ENQ_TXN_ID" ColumnName="ENQ_TXN_ID" />
+          <ScalarProperty Name="DEQ_TIME" ColumnName="DEQ_TIME" />
+          <ScalarProperty Name="DEQ_TIMESTAMP" ColumnName="DEQ_TIMESTAMP" />
+          <ScalarProperty Name="DEQ_USER_ID" ColumnName="DEQ_USER_ID" />
+          <ScalarProperty Name="DEQ_TXN_ID" ColumnName="DEQ_TXN_ID" />
+          <ScalarProperty Name="RETRY_COUNT" ColumnName="RETRY_COUNT" />
+          <ScalarProperty Name="EXCEPTION_QUEUE_OWNER" ColumnName="EXCEPTION_QUEUE_OWNER" />
+          <ScalarProperty Name="EXCEPTION_QUEUE" ColumnName="EXCEPTION_QUEUE" />
+          <ScalarProperty Name="USER_DATA" ColumnName="USER_DATA" />
+          <ScalarProperty Name="ORIGINAL_QUEUE_NAME" ColumnName="ORIGINAL_QUEUE_NAME" />
+          <ScalarProperty Name="ORIGINAL_QUEUE_OWNER" ColumnName="ORIGINAL_QUEUE_OWNER" />
+          <ScalarProperty Name="EXPIRATION_REASON" ColumnName="EXPIRATION_REASON" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CHECK_DELETE_VALID_RES">
+      <EntityTypeMapping TypeName="HotelResModel.CHECK_DELETE_VALID_RES">
+        <MappingFragment StoreEntitySet="CHECK_DELETE_VALID_RES">
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="ROOM_NO" ColumnName="ROOM_NO" />
+          <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+          <ScalarProperty Name="CUST_ID" ColumnName="CUST_ID" />
+          <ScalarProperty Name="DATE_ARRIVE" ColumnName="DATE_ARRIVE" />
+          <ScalarProperty Name="DATE_DEPART" ColumnName="DATE_DEPART" />
+          <ScalarProperty Name="TOTAL_COST" ColumnName="TOTAL_COST" />
+          <ScalarProperty Name="CHECK_IN" ColumnName="CHECK_IN" />
+          <ScalarProperty Name="CHECK_OUT" ColumnName="CHECK_OUT" />
+          <ScalarProperty Name="RES_STATUS" ColumnName="RES_STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CHECK_OUT_VIEW">
+      <EntityTypeMapping TypeName="HotelResModel.CHECK_OUT_VIEW">
+        <MappingFragment StoreEntitySet="CHECK_OUT_VIEW">
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="FORENAME" ColumnName="FORENAME" />
+          <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DELETERESERVATION_VIEW">
+      <EntityTypeMapping TypeName="HotelResModel.DELETERESERVATION_VIEW">
+        <MappingFragment StoreEntitySet="DELETERESERVATION_VIEW">
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="FORENAME" ColumnName="FORENAME" />
+          <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GET_ALL_DETAILS_FOR_CANCEL">
+      <EntityTypeMapping TypeName="HotelResModel.GET_ALL_DETAILS_FOR_CANCEL">
+        <MappingFragment StoreEntitySet="GET_ALL_DETAILS_FOR_CANCEL">
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="FORENAME" ColumnName="FORENAME" />
+          <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+          <ScalarProperty Name="DATE_ARRIVE" ColumnName="DATE_ARRIVE" />
+          <ScalarProperty Name="DATE_DEPART" ColumnName="DATE_DEPART" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GET_CUST_NAME_FOR_CANCEL">
+      <EntityTypeMapping TypeName="HotelResModel.GET_CUST_NAME_FOR_CANCEL">
+        <MappingFragment StoreEntitySet="GET_CUST_NAME_FOR_CANCEL">
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="FORENAME" ColumnName="FORENAME" />
+          <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MVIEW_EVALUATIONS">
+      <EntityTypeMapping TypeName="HotelResModel.MVIEW_EVALUATIONS">
+        <MappingFragment StoreEntitySet="MVIEW_EVALUATIONS">
+          <ScalarProperty Name="RUNID" ColumnName="RUNID" />
+          <ScalarProperty Name="MVIEW_OWNER" ColumnName="MVIEW_OWNER" />
+          <ScalarProperty Name="MVIEW_NAME" ColumnName="MVIEW_NAME" />
+          <ScalarProperty Name="RANK" ColumnName="RANK" />
+          <ScalarProperty Name="STORAGE_IN_BYTES" ColumnName="STORAGE_IN_BYTES" />
+          <ScalarProperty Name="FREQUENCY" ColumnName="FREQUENCY" />
+          <ScalarProperty Name="CUMULATIVE_BENEFIT" ColumnName="CUMULATIVE_BENEFIT" />
+          <ScalarProperty Name="BENEFIT_TO_COST_RATIO" ColumnName="BENEFIT_TO_COST_RATIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MVIEW_FILTER">
+      <EntityTypeMapping TypeName="HotelResModel.MVIEW_FILTER">
+        <MappingFragment StoreEntitySet="MVIEW_FILTER">
+          <ScalarProperty Name="FILTERID" ColumnName="FILTERID" />
+          <ScalarProperty Name="SUBFILTERNUM" ColumnName="SUBFILTERNUM" />
+          <ScalarProperty Name="SUBFILTERTYPE" ColumnName="SUBFILTERTYPE" />
+          <ScalarProperty Name="STR_VALUE" ColumnName="STR_VALUE" />
+          <ScalarProperty Name="NUM_VALUE1" ColumnName="NUM_VALUE1" />
+          <ScalarProperty Name="NUM_VALUE2" ColumnName="NUM_VALUE2" />
+          <ScalarProperty Name="DATE_VALUE1" ColumnName="DATE_VALUE1" />
+          <ScalarProperty Name="DATE_VALUE2" ColumnName="DATE_VALUE2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MVIEW_FILTERINSTANCE">
+      <EntityTypeMapping TypeName="HotelResModel.MVIEW_FILTERINSTANCE">
+        <MappingFragment StoreEntitySet="MVIEW_FILTERINSTANCE">
+          <ScalarProperty Name="RUNID" ColumnName="RUNID" />
+          <ScalarProperty Name="FILTERID" ColumnName="FILTERID" />
+          <ScalarProperty Name="SUBFILTERNUM" ColumnName="SUBFILTERNUM" />
+          <ScalarProperty Name="SUBFILTERTYPE" ColumnName="SUBFILTERTYPE" />
+          <ScalarProperty Name="STR_VALUE" ColumnName="STR_VALUE" />
+          <ScalarProperty Name="NUM_VALUE1" ColumnName="NUM_VALUE1" />
+          <ScalarProperty Name="NUM_VALUE2" ColumnName="NUM_VALUE2" />
+          <ScalarProperty Name="DATE_VALUE1" ColumnName="DATE_VALUE1" />
+          <ScalarProperty Name="DATE_VALUE2" ColumnName="DATE_VALUE2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MVIEW_LOG">
+      <EntityTypeMapping TypeName="HotelResModel.MVIEW_LOG">
+        <MappingFragment StoreEntitySet="MVIEW_LOG">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FILTERID" ColumnName="FILTERID" />
+          <ScalarProperty Name="RUN_BEGIN" ColumnName="RUN_BEGIN" />
+          <ScalarProperty Name="RUN_END" ColumnName="RUN_END" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="MESSAGE" ColumnName="MESSAGE" />
+          <ScalarProperty Name="COMPLETED" ColumnName="COMPLETED" />
+          <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+          <ScalarProperty Name="ERROR_CODE" ColumnName="ERROR_CODE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MVIEW_RECOMMENDATIONS">
+      <EntityTypeMapping TypeName="HotelResModel.MVIEW_RECOMMENDATIONS">
+        <MappingFragment StoreEntitySet="MVIEW_RECOMMENDATIONS">
+          <ScalarProperty Name="RUNID" ColumnName="RUNID" />
+          <ScalarProperty Name="ALL_TABLES" ColumnName="ALL_TABLES" />
+          <ScalarProperty Name="FACT_TABLES" ColumnName="FACT_TABLES" />
+          <ScalarProperty Name="GROUPING_LEVELS" ColumnName="GROUPING_LEVELS" />
+          <ScalarProperty Name="QUERY_TEXT" ColumnName="QUERY_TEXT" />
+          <ScalarProperty Name="RECOMMENDATION_NUMBER" ColumnName="RECOMMENDATION_NUMBER" />
+          <ScalarProperty Name="RECOMMENDED_ACTION" ColumnName="RECOMMENDED_ACTION" />
+          <ScalarProperty Name="MVIEW_OWNER" ColumnName="MVIEW_OWNER" />
+          <ScalarProperty Name="MVIEW_NAME" ColumnName="MVIEW_NAME" />
+          <ScalarProperty Name="STORAGE_IN_BYTES" ColumnName="STORAGE_IN_BYTES" />
+          <ScalarProperty Name="PCT_PERFORMANCE_GAIN" ColumnName="PCT_PERFORMANCE_GAIN" />
+          <ScalarProperty Name="BENEFIT_TO_COST_RATIO" ColumnName="BENEFIT_TO_COST_RATIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MVIEW_WORKLOAD">
+      <EntityTypeMapping TypeName="HotelResModel.MVIEW_WORKLOAD">
+        <MappingFragment StoreEntitySet="MVIEW_WORKLOAD">
+          <ScalarProperty Name="WORKLOADID" ColumnName="WORKLOADID" />
+          <ScalarProperty Name="IMPORT_TIME" ColumnName="IMPORT_TIME" />
+          <ScalarProperty Name="QUERYID" ColumnName="QUERYID" />
+          <ScalarProperty Name="APPLICATION" ColumnName="APPLICATION" />
+          <ScalarProperty Name="CARDINALITY" ColumnName="CARDINALITY" />
+          <ScalarProperty Name="RESULTSIZE" ColumnName="RESULTSIZE" />
+          <ScalarProperty Name="LASTUSE" ColumnName="LASTUSE" />
+          <ScalarProperty Name="FREQUENCY" ColumnName="FREQUENCY" />
+          <ScalarProperty Name="OWNER" ColumnName="OWNER" />
+          <ScalarProperty Name="PRIORITY" ColumnName="PRIORITY" />
+          <ScalarProperty Name="QUERY" ColumnName="QUERY" />
+          <ScalarProperty Name="RESPONSETIME" ColumnName="RESPONSETIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCT_PRIVS">
+      <EntityTypeMapping TypeName="HotelResModel.PRODUCT_PRIVS">
+        <MappingFragment StoreEntitySet="PRODUCT_PRIVS">
+          <ScalarProperty Name="PRODUCT" ColumnName="PRODUCT" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="ATTRIBUTE" ColumnName="ATTRIBUTE" />
+          <ScalarProperty Name="SCOPE" ColumnName="SCOPE" />
+          <ScalarProperty Name="NUMERIC_VALUE" ColumnName="NUMERIC_VALUE" />
+          <ScalarProperty Name="CHAR_VALUE" ColumnName="CHAR_VALUE" />
+          <ScalarProperty Name="DATE_VALUE" ColumnName="DATE_VALUE" />
+          <ScalarProperty Name="LONG_VALUE" ColumnName="LONG_VALUE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ROOMS_NOT_CURRENTLY_IN_USE">
+      <EntityTypeMapping TypeName="HotelResModel.ROOMS_NOT_CURRENTLY_IN_USE">
+        <MappingFragment StoreEntitySet="ROOMS_NOT_CURRENTLY_IN_USE">
+          <ScalarProperty Name="ROOM_NO" ColumnName="ROOM_NO" />
+          <ScalarProperty Name="ROOM_TYPE" ColumnName="ROOM_TYPE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ADD_ROOM" FunctionName="HotelResModel.Store.ADD_ROOM" />
+    <FunctionImportMapping FunctionImportName="ADD_ROOM_RATE" FunctionName="HotelResModel.Store.ADD_ROOM_RATE" />
+    <FunctionImportMapping FunctionImportName="ADMIN_LOGIN_CHECK" FunctionName="HotelResModel.Store.ADMIN_LOGIN_CHECK" />
+    <FunctionImportMapping FunctionImportName="CANCEL_RESERVATION" FunctionName="HotelResModel.Store.CANCEL_RESERVATION" />
+    <FunctionImportMapping FunctionImportName="CHECK_IN" FunctionName="HotelResModel.Store.CHECK_IN" />
+    <FunctionImportMapping FunctionImportName="CHECK_OUT" FunctionName="HotelResModel.Store.CHECK_OUT" />
+  </EntityContainerMapping>
+</Mapping>

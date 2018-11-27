@@ -1,0 +1,1910 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HotelModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADMINS">
+          <Key>
+            <PropertyRef Name="ADMIN_ID" />
+          </Key>
+          <Property Name="ADMIN_ID" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="USERNAME" Type="varchar2" MaxLength="12" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar2" MaxLength="12" Nullable="false" />
+          <Property Name="FAILED_ATTEMPTS" Type="number" Precision="1" Scale="0" />
+          <Property Name="BLOCK_TIME" Type="timestamp" Precision="6" />
+        </EntityType>
+        <EntityType Name="CUSTOMERS">
+          <Key>
+            <PropertyRef Name="CUST_ID" />
+          </Key>
+          <Property Name="CUST_ID" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="FORENAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="SURNAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar2" MaxLength="30" />
+          <Property Name="MOBILE_NO" Type="varchar2" MaxLength="15" />
+          <Property Name="LOYALTY" Type="varchar2" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="RESERVATIONS">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+          </Key>
+          <Property Name="RES_ID" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="ROOM_NO" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="ADMIN_ID" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="CUST_ID" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="DATE_ARRIVE" Type="date" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="date" Nullable="false" />
+          <Property Name="TOTAL_COST" Type="number" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="CHECK_IN" Type="varchar2" MaxLength="1" Nullable="false" />
+          <Property Name="CHECK_OUT" Type="varchar2" MaxLength="1" Nullable="false" />
+          <Property Name="RES_STATUS" Type="varchar2" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROOMRATES">
+          <Key>
+            <PropertyRef Name="ROOM_TYPE" />
+          </Key>
+          <Property Name="ROOM_TYPE" Type="varchar2" MaxLength="3" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="RATE" Type="number" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROOMS">
+          <Key>
+            <PropertyRef Name="ROOM_NO" />
+          </Key>
+          <Property Name="ROOM_NO" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="ROOM_TYPE" Type="varchar2" MaxLength="3" Nullable="false" />
+          <Property Name="STATUS" Type="varchar2" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.ALL_CHECK_INS_TODAY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ALL_CHECK_INS_TODAY">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+            <PropertyRef Name="ROOM_NO" />
+            <PropertyRef Name="ADMIN_ID" />
+            <PropertyRef Name="CUST_ID" />
+            <PropertyRef Name="DATE_ARRIVE" />
+            <PropertyRef Name="DATE_DEPART" />
+            <PropertyRef Name="TOTAL_COST" />
+            <PropertyRef Name="CHECK_IN" />
+            <PropertyRef Name="CHECK_OUT" />
+            <PropertyRef Name="RES_STATUS" />
+          </Key>
+          <Property Name="RES_ID" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="ROOM_NO" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="ADMIN_ID" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="CUST_ID" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="DATE_ARRIVE" Type="date" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="date" Nullable="false" />
+          <Property Name="TOTAL_COST" Type="number" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="CHECK_IN" Type="varchar2" MaxLength="1" Nullable="false" />
+          <Property Name="CHECK_OUT" Type="varchar2" MaxLength="1" Nullable="false" />
+          <Property Name="RES_STATUS" Type="varchar2" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.AQ$_DEF$_AQCALL_F' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AQ$_DEF$_AQCALL_F">
+          <Key>
+            <PropertyRef Name="ENQ_TID" />
+            <PropertyRef Name="STEP_NO" />
+            <PropertyRef Name="QUEUE_ID" />
+          </Key>
+          <Property Name="Q_NAME" Type="varchar2" MaxLength="30" />
+          <Property Name="ROW_ID" Type="rowid" />
+          <Property Name="MSGID" Type="guid raw" />
+          <Property Name="CORRID" Type="varchar2" MaxLength="128" />
+          <Property Name="PRIORITY" Type="number" Precision="38" Scale="0" />
+          <Property Name="STATE" Type="number" Precision="38" Scale="0" />
+          <Property Name="DELAY" Type="timestamp" Precision="6" />
+          <Property Name="EXPIRATION" Type="number" Precision="38" Scale="0" />
+          <Property Name="ENQ_TIME" Type="timestamp" Precision="6" />
+          <Property Name="ENQ_UID" Type="number" Precision="38" Scale="0" />
+          <Property Name="ENQ_TID" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="DEQ_TIME" Type="timestamp" Precision="6" />
+          <Property Name="DEQ_UID" Type="number" Precision="38" Scale="0" />
+          <Property Name="DEQ_TID" Type="varchar2" MaxLength="30" />
+          <Property Name="RETRY_COUNT" Type="number" Precision="38" Scale="0" />
+          <Property Name="EXCEPTION_QSCHEMA" Type="varchar2" MaxLength="30" />
+          <Property Name="EXCEPTION_QUEUE" Type="varchar2" MaxLength="30" />
+          <Property Name="CSCN" Type="number" Precision="38" Scale="0" />
+          <Property Name="DSCN" Type="number" Precision="38" Scale="0" />
+          <Property Name="CHAIN_NO" Type="number" Precision="38" Scale="0" />
+          <Property Name="LOCAL_ORDER_NO" Type="number" Precision="38" Scale="0" />
+          <Property Name="TIME_MANAGER_INFO" Type="timestamp" Precision="6" />
+          <Property Name="STEP_NO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USER_DATA" Type="blob" />
+          <Property Name="QUEUE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.AQ$_DEF$_AQERROR_F' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AQ$_DEF$_AQERROR_F">
+          <Key>
+            <PropertyRef Name="ENQ_TID" />
+            <PropertyRef Name="STEP_NO" />
+            <PropertyRef Name="QUEUE_ID" />
+          </Key>
+          <Property Name="Q_NAME" Type="varchar2" MaxLength="30" />
+          <Property Name="ROW_ID" Type="rowid" />
+          <Property Name="MSGID" Type="guid raw" />
+          <Property Name="CORRID" Type="varchar2" MaxLength="128" />
+          <Property Name="PRIORITY" Type="number" Precision="38" Scale="0" />
+          <Property Name="STATE" Type="number" Precision="38" Scale="0" />
+          <Property Name="DELAY" Type="timestamp" Precision="6" />
+          <Property Name="EXPIRATION" Type="number" Precision="38" Scale="0" />
+          <Property Name="ENQ_TIME" Type="timestamp" Precision="6" />
+          <Property Name="ENQ_UID" Type="number" Precision="38" Scale="0" />
+          <Property Name="ENQ_TID" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="DEQ_TIME" Type="timestamp" Precision="6" />
+          <Property Name="DEQ_UID" Type="number" Precision="38" Scale="0" />
+          <Property Name="DEQ_TID" Type="varchar2" MaxLength="30" />
+          <Property Name="RETRY_COUNT" Type="number" Precision="38" Scale="0" />
+          <Property Name="EXCEPTION_QSCHEMA" Type="varchar2" MaxLength="30" />
+          <Property Name="EXCEPTION_QUEUE" Type="varchar2" MaxLength="30" />
+          <Property Name="CSCN" Type="number" Precision="38" Scale="0" />
+          <Property Name="DSCN" Type="number" Precision="38" Scale="0" />
+          <Property Name="CHAIN_NO" Type="number" Precision="38" Scale="0" />
+          <Property Name="LOCAL_ORDER_NO" Type="number" Precision="38" Scale="0" />
+          <Property Name="TIME_MANAGER_INFO" Type="timestamp" Precision="6" />
+          <Property Name="STEP_NO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USER_DATA" Type="blob" />
+          <Property Name="QUEUE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.AQ$DEF$_AQCALL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AQ$DEF$_AQCALL">
+          <Key>
+            <PropertyRef Name="ENQ_TXN_ID" />
+          </Key>
+          <Property Name="QUEUE" Type="varchar2" MaxLength="30" />
+          <Property Name="MSG_ID" Type="guid raw" />
+          <Property Name="CORR_ID" Type="varchar2" MaxLength="128" />
+          <Property Name="MSG_PRIORITY" Type="number" Precision="38" Scale="0" />
+          <Property Name="MSG_STATE" Type="varchar2" MaxLength="16" />
+          <Property Name="DELAY" Type="date" />
+          <Property Name="DELAY_TIMESTAMP" Type="timestamp" Precision="6" />
+          <Property Name="EXPIRATION" Type="number" Precision="38" Scale="0" />
+          <Property Name="ENQ_TIME" Type="date" />
+          <Property Name="ENQ_TIMESTAMP" Type="timestamp" Precision="6" />
+          <Property Name="ENQ_USER_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="ENQ_TXN_ID" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="DEQ_TIME" Type="date" />
+          <Property Name="DEQ_TIMESTAMP" Type="timestamp" Precision="6" />
+          <Property Name="DEQ_USER_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="DEQ_TXN_ID" Type="varchar2" MaxLength="30" />
+          <Property Name="RETRY_COUNT" Type="number" Precision="38" Scale="0" />
+          <Property Name="EXCEPTION_QUEUE_OWNER" Type="varchar2" MaxLength="30" />
+          <Property Name="EXCEPTION_QUEUE" Type="varchar2" MaxLength="30" />
+          <Property Name="USER_DATA" Type="blob" />
+          <Property Name="ORIGINAL_QUEUE_NAME" Type="varchar2" MaxLength="30" />
+          <Property Name="ORIGINAL_QUEUE_OWNER" Type="varchar2" MaxLength="30" />
+          <Property Name="EXPIRATION_REASON" Type="varchar2" MaxLength="18" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.AQ$DEF$_AQERROR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AQ$DEF$_AQERROR">
+          <Key>
+            <PropertyRef Name="ENQ_TXN_ID" />
+          </Key>
+          <Property Name="QUEUE" Type="varchar2" MaxLength="30" />
+          <Property Name="MSG_ID" Type="guid raw" />
+          <Property Name="CORR_ID" Type="varchar2" MaxLength="128" />
+          <Property Name="MSG_PRIORITY" Type="number" Precision="38" Scale="0" />
+          <Property Name="MSG_STATE" Type="varchar2" MaxLength="16" />
+          <Property Name="DELAY" Type="date" />
+          <Property Name="DELAY_TIMESTAMP" Type="timestamp" Precision="6" />
+          <Property Name="EXPIRATION" Type="number" Precision="38" Scale="0" />
+          <Property Name="ENQ_TIME" Type="date" />
+          <Property Name="ENQ_TIMESTAMP" Type="timestamp" Precision="6" />
+          <Property Name="ENQ_USER_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="ENQ_TXN_ID" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="DEQ_TIME" Type="date" />
+          <Property Name="DEQ_TIMESTAMP" Type="timestamp" Precision="6" />
+          <Property Name="DEQ_USER_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="DEQ_TXN_ID" Type="varchar2" MaxLength="30" />
+          <Property Name="RETRY_COUNT" Type="number" Precision="38" Scale="0" />
+          <Property Name="EXCEPTION_QUEUE_OWNER" Type="varchar2" MaxLength="30" />
+          <Property Name="EXCEPTION_QUEUE" Type="varchar2" MaxLength="30" />
+          <Property Name="USER_DATA" Type="blob" />
+          <Property Name="ORIGINAL_QUEUE_NAME" Type="varchar2" MaxLength="30" />
+          <Property Name="ORIGINAL_QUEUE_OWNER" Type="varchar2" MaxLength="30" />
+          <Property Name="EXPIRATION_REASON" Type="varchar2" MaxLength="18" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.CHECK_DELETE_VALID_RES' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CHECK_DELETE_VALID_RES">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+            <PropertyRef Name="ROOM_NO" />
+            <PropertyRef Name="ADMIN_ID" />
+            <PropertyRef Name="CUST_ID" />
+            <PropertyRef Name="DATE_ARRIVE" />
+            <PropertyRef Name="DATE_DEPART" />
+            <PropertyRef Name="TOTAL_COST" />
+            <PropertyRef Name="CHECK_IN" />
+            <PropertyRef Name="CHECK_OUT" />
+            <PropertyRef Name="RES_STATUS" />
+          </Key>
+          <Property Name="RES_ID" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="ROOM_NO" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="ADMIN_ID" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="CUST_ID" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="DATE_ARRIVE" Type="date" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="date" Nullable="false" />
+          <Property Name="TOTAL_COST" Type="number" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="CHECK_IN" Type="varchar2" MaxLength="1" Nullable="false" />
+          <Property Name="CHECK_OUT" Type="varchar2" MaxLength="1" Nullable="false" />
+          <Property Name="RES_STATUS" Type="varchar2" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.CHECK_OUT_VIEW' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CHECK_OUT_VIEW">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+            <PropertyRef Name="FORENAME" />
+            <PropertyRef Name="SURNAME" />
+          </Key>
+          <Property Name="RES_ID" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="FORENAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="SURNAME" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.DELETERESERVATION_VIEW' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DELETERESERVATION_VIEW">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+            <PropertyRef Name="FORENAME" />
+            <PropertyRef Name="SURNAME" />
+          </Key>
+          <Property Name="RES_ID" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="FORENAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="SURNAME" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.GET_ALL_DETAILS_FOR_CANCEL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GET_ALL_DETAILS_FOR_CANCEL">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+            <PropertyRef Name="FORENAME" />
+            <PropertyRef Name="SURNAME" />
+            <PropertyRef Name="DATE_ARRIVE" />
+            <PropertyRef Name="DATE_DEPART" />
+          </Key>
+          <Property Name="RES_ID" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="FORENAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="SURNAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="DATE_ARRIVE" Type="date" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="date" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar2" MaxLength="30" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.GET_CUST_NAME_FOR_CANCEL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GET_CUST_NAME_FOR_CANCEL">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+            <PropertyRef Name="FORENAME" />
+            <PropertyRef Name="SURNAME" />
+          </Key>
+          <Property Name="RES_ID" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="FORENAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="SURNAME" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.MVIEW_EVALUATIONS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MVIEW_EVALUATIONS">
+          <Key>
+            <PropertyRef Name="RUNID" />
+            <PropertyRef Name="RANK" />
+            <PropertyRef Name="BENEFIT_TO_COST_RATIO" />
+          </Key>
+          <Property Name="RUNID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="MVIEW_OWNER" Type="varchar2" MaxLength="30" />
+          <Property Name="MVIEW_NAME" Type="varchar2" MaxLength="30" />
+          <Property Name="RANK" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="STORAGE_IN_BYTES" Type="number" Precision="38" Scale="0" />
+          <Property Name="FREQUENCY" Type="number" Precision="38" Scale="0" />
+          <Property Name="CUMULATIVE_BENEFIT" Type="number" Precision="38" Scale="0" />
+          <Property Name="BENEFIT_TO_COST_RATIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.MVIEW_FILTER' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MVIEW_FILTER">
+          <Key>
+            <PropertyRef Name="FILTERID" />
+            <PropertyRef Name="SUBFILTERNUM" />
+          </Key>
+          <Property Name="FILTERID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="SUBFILTERNUM" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="SUBFILTERTYPE" Type="varchar2" MaxLength="12" />
+          <Property Name="STR_VALUE" Type="varchar2" MaxLength="1028" />
+          <Property Name="NUM_VALUE1" Type="number" Precision="38" Scale="0" />
+          <Property Name="NUM_VALUE2" Type="number" Precision="38" Scale="0" />
+          <Property Name="DATE_VALUE1" Type="date" />
+          <Property Name="DATE_VALUE2" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.MVIEW_FILTERINSTANCE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MVIEW_FILTERINSTANCE">
+          <Key>
+            <PropertyRef Name="RUNID" />
+          </Key>
+          <Property Name="RUNID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FILTERID" Type="number" Precision="38" Scale="0" />
+          <Property Name="SUBFILTERNUM" Type="number" Precision="38" Scale="0" />
+          <Property Name="SUBFILTERTYPE" Type="varchar2" MaxLength="12" />
+          <Property Name="STR_VALUE" Type="varchar2" MaxLength="1028" />
+          <Property Name="NUM_VALUE1" Type="number" Precision="38" Scale="0" />
+          <Property Name="NUM_VALUE2" Type="number" Precision="38" Scale="0" />
+          <Property Name="DATE_VALUE1" Type="date" />
+          <Property Name="DATE_VALUE2" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.MVIEW_LOG' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MVIEW_LOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FILTERID" Type="number" Precision="38" Scale="0" />
+          <Property Name="RUN_BEGIN" Type="date" />
+          <Property Name="RUN_END" Type="date" />
+          <Property Name="TYPE" Type="varchar2" MaxLength="11" />
+          <Property Name="STATUS" Type="varchar2" MaxLength="11" />
+          <Property Name="MESSAGE" Type="varchar2" MaxLength="2000" />
+          <Property Name="COMPLETED" Type="number" Precision="38" Scale="0" />
+          <Property Name="TOTAL" Type="number" Precision="38" Scale="0" />
+          <Property Name="ERROR_CODE" Type="varchar2" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.MVIEW_RECOMMENDATIONS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MVIEW_RECOMMENDATIONS">
+          <Key>
+            <PropertyRef Name="RUNID" />
+            <PropertyRef Name="RECOMMENDATION_NUMBER" />
+            <PropertyRef Name="BENEFIT_TO_COST_RATIO" />
+          </Key>
+          <Property Name="RUNID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ALL_TABLES" Type="varchar2" MaxLength="2000" />
+          <Property Name="FACT_TABLES" Type="varchar2" MaxLength="1000" />
+          <Property Name="GROUPING_LEVELS" Type="varchar2" MaxLength="2000" />
+          <Property Name="QUERY_TEXT" Type="long" />
+          <Property Name="RECOMMENDATION_NUMBER" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RECOMMENDED_ACTION" Type="varchar2" MaxLength="6" />
+          <Property Name="MVIEW_OWNER" Type="varchar2" MaxLength="30" />
+          <Property Name="MVIEW_NAME" Type="varchar2" MaxLength="30" />
+          <Property Name="STORAGE_IN_BYTES" Type="number" Precision="38" Scale="0" />
+          <Property Name="PCT_PERFORMANCE_GAIN" Type="number" Precision="38" Scale="0" />
+          <Property Name="BENEFIT_TO_COST_RATIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.MVIEW_WORKLOAD' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MVIEW_WORKLOAD">
+          <Key>
+            <PropertyRef Name="WORKLOADID" />
+            <PropertyRef Name="IMPORT_TIME" />
+            <PropertyRef Name="QUERYID" />
+            <PropertyRef Name="OWNER" />
+            <PropertyRef Name="QUERY" />
+          </Key>
+          <Property Name="WORKLOADID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="IMPORT_TIME" Type="date" Nullable="false" />
+          <Property Name="QUERYID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="APPLICATION" Type="varchar2" MaxLength="64" />
+          <Property Name="CARDINALITY" Type="number" Precision="38" Scale="0" />
+          <Property Name="RESULTSIZE" Type="number" Precision="38" Scale="0" />
+          <Property Name="LASTUSE" Type="date" />
+          <Property Name="FREQUENCY" Type="number" Precision="38" Scale="0" />
+          <Property Name="OWNER" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="PRIORITY" Type="number" Precision="38" Scale="0" />
+          <Property Name="QUERY" Type="long" Nullable="false" />
+          <Property Name="RESPONSETIME" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.PRODUCT_PRIVS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PRODUCT_PRIVS">
+          <Key>
+            <PropertyRef Name="PRODUCT" />
+          </Key>
+          <Property Name="PRODUCT" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="USERID" Type="varchar2" MaxLength="30" />
+          <Property Name="ATTRIBUTE" Type="varchar2" MaxLength="240" />
+          <Property Name="SCOPE" Type="varchar2" MaxLength="240" />
+          <Property Name="NUMERIC_VALUE" Type="number" Precision="15" Scale="2" />
+          <Property Name="CHAR_VALUE" Type="varchar2" MaxLength="240" />
+          <Property Name="DATE_VALUE" Type="date" />
+          <Property Name="LONG_VALUE" Type="long" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.ROOMS_NOT_CURRENTLY_IN_USE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ROOMS_NOT_CURRENTLY_IN_USE">
+          <Key>
+            <PropertyRef Name="ROOM_NO" />
+            <PropertyRef Name="ROOM_TYPE" />
+            <PropertyRef Name="STATUS" />
+          </Key>
+          <Property Name="ROOM_NO" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="ROOM_TYPE" Type="varchar2" MaxLength="3" Nullable="false" />
+          <Property Name="STATUS" Type="varchar2" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.SIMPLERIIMRATE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SIMPLERIIMRATE">
+          <Key>
+            <PropertyRef Name="ROOM_TYPE" />
+            <PropertyRef Name="DESCRIPTION" />
+            <PropertyRef Name="RATE" />
+          </Key>
+          <Property Name="ROOM_TYPE" Type="varchar2" MaxLength="3" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="RATE" Type="number" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_RESERVATIONS_ADMINS">
+          <End Role="ADMINS" Type="Self.ADMINS" Multiplicity="1" />
+          <End Role="RESERVATIONS" Type="Self.RESERVATIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADMINS">
+              <PropertyRef Name="ADMIN_ID" />
+            </Principal>
+            <Dependent Role="RESERVATIONS">
+              <PropertyRef Name="ADMIN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESERVATIONS_CUSTOMERS">
+          <End Role="CUSTOMERS" Type="Self.CUSTOMERS" Multiplicity="1" />
+          <End Role="RESERVATIONS" Type="Self.RESERVATIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMERS">
+              <PropertyRef Name="CUST_ID" />
+            </Principal>
+            <Dependent Role="RESERVATIONS">
+              <PropertyRef Name="CUST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESERVATIONS_ROOMS">
+          <End Role="ROOMS" Type="Self.ROOMS" Multiplicity="1" />
+          <End Role="RESERVATIONS" Type="Self.RESERVATIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOMS">
+              <PropertyRef Name="ROOM_NO" />
+            </Principal>
+            <Dependent Role="RESERVATIONS">
+              <PropertyRef Name="ROOM_NO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ROOMS_ROOMRATES">
+          <End Role="ROOMRATES" Type="Self.ROOMRATES" Multiplicity="1" />
+          <End Role="ROOMS" Type="Self.ROOMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOMRATES">
+              <PropertyRef Name="ROOM_TYPE" />
+            </Principal>
+            <Dependent Role="ROOMS">
+              <PropertyRef Name="ROOM_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ADD_ROOM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SYSTEM">
+          <Parameter Name="R_ROOM_NO" Type="number" Mode="In" />
+          <Parameter Name="R_ROOM_TYPE" Type="varchar2" Mode="In" />
+          <Parameter Name="R_STATUS" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="ADD_ROOM_RATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SYSTEM">
+          <Parameter Name="R_ROOM_TYPE" Type="varchar2" Mode="In" />
+          <Parameter Name="R_DESCRIPTION" Type="varchar2" Mode="In" />
+          <Parameter Name="R_RATE" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ADMIN_LOGIN_CHECK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SYSTEM">
+          <Parameter Name="GET_ENTERED_USERNAME" Type="varchar2" Mode="In" />
+          <Parameter Name="GET_ENTERED_PASSWORD" Type="varchar2" Mode="In" />
+          <Parameter Name="GET_EXISTING_USERNAME" Type="varchar2" Mode="Out" />
+          <Parameter Name="GET_EXISTING_PASSWORD" Type="varchar2" Mode="Out" />
+          <Parameter Name="GET_FAILED_ATTEMPTS" Type="number" Mode="InOut" />
+          <Parameter Name="GET_BLOCKTIME" Type="timestamp" Mode="Out" />
+        </Function>
+        <Function Name="CANCEL_RESERVATION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SYSTEM">
+          <Parameter Name="R_OUTPUT_RES_ID" Type="number" Mode="Out" />
+          <Parameter Name="R_INPUT_RES_ID" Type="number" Mode="In" />
+          <Parameter Name="R_DATE_DEPART" Type="date" Mode="Out" />
+          <Parameter Name="R_DATE_ARRIVE" Type="date" Mode="Out" />
+          <Parameter Name="C_SURNAME" Type="varchar2" Mode="Out" />
+          <Parameter Name="C_FORENAME" Type="varchar2" Mode="Out" />
+          <Parameter Name="C_EMAIL" Type="varchar2" Mode="Out" />
+        </Function>
+        <Function Name="CHECK_IN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SYSTEM">
+          <Parameter Name="RE_RES_ID" Type="number" Mode="In" />
+          <Parameter Name="RE_CHECK_IN" Type="varchar2" Mode="In" />
+          <Parameter Name="R_RES_ID" Type="number" Mode="Out" />
+          <Parameter Name="C_FORENAME" Type="varchar2" Mode="Out" />
+          <Parameter Name="C_SURNAME" Type="varchar2" Mode="Out" />
+          <Parameter Name="R_DATE_ARRIVE" Type="date" Mode="Out" />
+          <Parameter Name="R_DATE_DEPART" Type="date" Mode="Out" />
+        </Function>
+        <Function Name="CHECK_OUT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SYSTEM">
+          <Parameter Name="RE_RES_ID" Type="number" Mode="In" />
+          <Parameter Name="R_RES_ID" Type="number" Mode="Out" />
+          <Parameter Name="C_FORENAME" Type="varchar2" Mode="Out" />
+          <Parameter Name="C_SURNAME" Type="varchar2" Mode="Out" />
+          <Parameter Name="R_DATE_ARRIVE" Type="date" Mode="Out" />
+          <Parameter Name="R_DATE_DEPART" Type="date" Mode="Out" />
+        </Function>
+        <Function Name="MAKE_RESERVATION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SYSTEM">
+          <Parameter Name="RES_ID" Type="number" Mode="In" />
+          <Parameter Name="I_ROOM_NO" Type="number" Mode="In" />
+          <Parameter Name="ADMIN_ID" Type="number" Mode="In" />
+          <Parameter Name="DATE_ARRIVE" Type="date" Mode="In" />
+          <Parameter Name="DATE_DEPART" Type="date" Mode="In" />
+          <Parameter Name="TOTAL_COST" Type="number" Mode="InOut" />
+          <Parameter Name="CHECK_IN" Type="varchar2" Mode="In" />
+          <Parameter Name="CHECK_OUT" Type="varchar2" Mode="In" />
+          <Parameter Name="RES_STATUS" Type="varchar2" Mode="In" />
+          <Parameter Name="I_CUST_ID" Type="number" Mode="In" />
+          <Parameter Name="RESULT1" Type="number" Mode="Out" />
+          <Parameter Name="CUSTOMERLOYALTYSTATUS" Type="varchar2" Mode="Out" />
+        </Function>
+        <Function Name="SP_MAKERESERVATION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SYSTEM">
+          <Parameter Name="RES_ID" Type="number" Mode="In" />
+          <Parameter Name="I_ROOM_NO" Type="number" Mode="In" />
+          <Parameter Name="ADMIN_ID" Type="number" Mode="In" />
+          <Parameter Name="DATE_ARRIVE" Type="date" Mode="In" />
+          <Parameter Name="DATE_DEPART" Type="date" Mode="In" />
+          <Parameter Name="TOTAL_COST" Type="number" Mode="InOut" />
+          <Parameter Name="CHECK_IN" Type="varchar2" Mode="In" />
+          <Parameter Name="CHECK_OUT" Type="varchar2" Mode="In" />
+          <Parameter Name="RES_STATUS" Type="varchar2" Mode="In" />
+          <Parameter Name="I_CUST_ID" Type="number" Mode="In" />
+          <Parameter Name="RESULT1" Type="number" Mode="Out" />
+          <Parameter Name="CUSTOMERLOYALTYSTATUS" Type="varchar2" Mode="Out" />
+        </Function>
+        <Function Name="SP_NORESBONUS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SYSTEM" />
+        <Function Name="SP_SEARCHAVAILABLEROOM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SYSTEM">
+          <Parameter Name="I_ROOM_TYPE" Type="varchar2" Mode="In" />
+          <Parameter Name="I_ARRIVAL_DATE" Type="date" Mode="In" />
+          <Parameter Name="I_DEPARTURE_DATE" Type="date" Mode="In" />
+          <Parameter Name="O_ROOM_NO" Type="number" Mode="Out" />
+          <Parameter Name="O_ROOM_TYPE" Type="varchar2" Mode="Out" />
+          <Parameter Name="O_STATUS" Type="varchar2" Mode="Out" />
+        </Function>
+        <Function Name="SP_SEARCHEXISTINGCUST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SYSTEM">
+          <Parameter Name="C_FORENAME" Type="varchar2" Mode="In" />
+          <Parameter Name="O_CUST_ID" Type="number" Mode="Out" />
+          <Parameter Name="O_FORENAME" Type="varchar2" Mode="Out" />
+          <Parameter Name="O_SURNAME" Type="varchar2" Mode="Out" />
+          <Parameter Name="O_DOB" Type="date" Mode="Out" />
+          <Parameter Name="O_EMAIL" Type="varchar2" Mode="Out" />
+          <Parameter Name="O_MOBILE_NO" Type="varchar2" Mode="Out" />
+        </Function>
+        <Function Name="SP_SEARCH_EXISTING_CUSTOMER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SYSTEM">
+          <Parameter Name="C_FORENAME" Type="varchar2" Mode="In" />
+          <Parameter Name="O_CUST_ID" Type="number" Mode="Out" />
+          <Parameter Name="O_FORENAME" Type="varchar2" Mode="Out" />
+          <Parameter Name="O_SURNAME" Type="varchar2" Mode="Out" />
+          <Parameter Name="O_DOB" Type="date" Mode="Out" />
+          <Parameter Name="O_EMAIL" Type="varchar2" Mode="Out" />
+          <Parameter Name="O_MOBILE_NO" Type="varchar2" Mode="Out" />
+          <Parameter Name="O_LOYALTY" Type="varchar2" Mode="Out" />
+        </Function>
+        <EntityContainer Name="HotelModelStoreContainer">
+          <EntitySet Name="ADMINS" EntityType="Self.ADMINS" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMERS" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="RESERVATIONS" EntityType="Self.RESERVATIONS" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="ROOMRATES" EntityType="Self.ROOMRATES" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="ROOMS" EntityType="Self.ROOMS" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="ALL_CHECK_INS_TODAY" EntityType="Self.ALL_CHECK_INS_TODAY" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"ALL_CHECK_INS_TODAY"."RES_ID" AS "RES_ID", 
+"ALL_CHECK_INS_TODAY"."ROOM_NO" AS "ROOM_NO", 
+"ALL_CHECK_INS_TODAY"."ADMIN_ID" AS "ADMIN_ID", 
+"ALL_CHECK_INS_TODAY"."CUST_ID" AS "CUST_ID", 
+"ALL_CHECK_INS_TODAY"."DATE_ARRIVE" AS "DATE_ARRIVE", 
+"ALL_CHECK_INS_TODAY"."DATE_DEPART" AS "DATE_DEPART", 
+"ALL_CHECK_INS_TODAY"."TOTAL_COST" AS "TOTAL_COST", 
+"ALL_CHECK_INS_TODAY"."CHECK_IN" AS "CHECK_IN", 
+"ALL_CHECK_INS_TODAY"."CHECK_OUT" AS "CHECK_OUT", 
+"ALL_CHECK_INS_TODAY"."RES_STATUS" AS "RES_STATUS"
+FROM "SYSTEM"."ALL_CHECK_INS_TODAY" "ALL_CHECK_INS_TODAY"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AQ$_DEF$_AQCALL_F" EntityType="Self.AQ$_DEF$_AQCALL_F" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"AQ$_DEF$_AQCALL_F"."Q_NAME" AS "Q_NAME", 
+"AQ$_DEF$_AQCALL_F"."ROW_ID" AS "ROW_ID", 
+"AQ$_DEF$_AQCALL_F"."MSGID" AS "MSGID", 
+"AQ$_DEF$_AQCALL_F"."CORRID" AS "CORRID", 
+"AQ$_DEF$_AQCALL_F"."PRIORITY" AS "PRIORITY", 
+"AQ$_DEF$_AQCALL_F"."STATE" AS "STATE", 
+"AQ$_DEF$_AQCALL_F"."DELAY" AS "DELAY", 
+"AQ$_DEF$_AQCALL_F"."EXPIRATION" AS "EXPIRATION", 
+"AQ$_DEF$_AQCALL_F"."ENQ_TIME" AS "ENQ_TIME", 
+"AQ$_DEF$_AQCALL_F"."ENQ_UID" AS "ENQ_UID", 
+"AQ$_DEF$_AQCALL_F"."ENQ_TID" AS "ENQ_TID", 
+"AQ$_DEF$_AQCALL_F"."DEQ_TIME" AS "DEQ_TIME", 
+"AQ$_DEF$_AQCALL_F"."DEQ_UID" AS "DEQ_UID", 
+"AQ$_DEF$_AQCALL_F"."DEQ_TID" AS "DEQ_TID", 
+"AQ$_DEF$_AQCALL_F"."RETRY_COUNT" AS "RETRY_COUNT", 
+"AQ$_DEF$_AQCALL_F"."EXCEPTION_QSCHEMA" AS "EXCEPTION_QSCHEMA", 
+"AQ$_DEF$_AQCALL_F"."EXCEPTION_QUEUE" AS "EXCEPTION_QUEUE", 
+"AQ$_DEF$_AQCALL_F"."CSCN" AS "CSCN", 
+"AQ$_DEF$_AQCALL_F"."DSCN" AS "DSCN", 
+"AQ$_DEF$_AQCALL_F"."CHAIN_NO" AS "CHAIN_NO", 
+"AQ$_DEF$_AQCALL_F"."LOCAL_ORDER_NO" AS "LOCAL_ORDER_NO", 
+"AQ$_DEF$_AQCALL_F"."TIME_MANAGER_INFO" AS "TIME_MANAGER_INFO", 
+"AQ$_DEF$_AQCALL_F"."STEP_NO" AS "STEP_NO", 
+"AQ$_DEF$_AQCALL_F"."USER_DATA" AS "USER_DATA", 
+"AQ$_DEF$_AQCALL_F"."QUEUE_ID" AS "QUEUE_ID"
+FROM "SYSTEM"."AQ$_DEF$_AQCALL_F" "AQ$_DEF$_AQCALL_F"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AQ$_DEF$_AQERROR_F" EntityType="Self.AQ$_DEF$_AQERROR_F" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"AQ$_DEF$_AQERROR_F"."Q_NAME" AS "Q_NAME", 
+"AQ$_DEF$_AQERROR_F"."ROW_ID" AS "ROW_ID", 
+"AQ$_DEF$_AQERROR_F"."MSGID" AS "MSGID", 
+"AQ$_DEF$_AQERROR_F"."CORRID" AS "CORRID", 
+"AQ$_DEF$_AQERROR_F"."PRIORITY" AS "PRIORITY", 
+"AQ$_DEF$_AQERROR_F"."STATE" AS "STATE", 
+"AQ$_DEF$_AQERROR_F"."DELAY" AS "DELAY", 
+"AQ$_DEF$_AQERROR_F"."EXPIRATION" AS "EXPIRATION", 
+"AQ$_DEF$_AQERROR_F"."ENQ_TIME" AS "ENQ_TIME", 
+"AQ$_DEF$_AQERROR_F"."ENQ_UID" AS "ENQ_UID", 
+"AQ$_DEF$_AQERROR_F"."ENQ_TID" AS "ENQ_TID", 
+"AQ$_DEF$_AQERROR_F"."DEQ_TIME" AS "DEQ_TIME", 
+"AQ$_DEF$_AQERROR_F"."DEQ_UID" AS "DEQ_UID", 
+"AQ$_DEF$_AQERROR_F"."DEQ_TID" AS "DEQ_TID", 
+"AQ$_DEF$_AQERROR_F"."RETRY_COUNT" AS "RETRY_COUNT", 
+"AQ$_DEF$_AQERROR_F"."EXCEPTION_QSCHEMA" AS "EXCEPTION_QSCHEMA", 
+"AQ$_DEF$_AQERROR_F"."EXCEPTION_QUEUE" AS "EXCEPTION_QUEUE", 
+"AQ$_DEF$_AQERROR_F"."CSCN" AS "CSCN", 
+"AQ$_DEF$_AQERROR_F"."DSCN" AS "DSCN", 
+"AQ$_DEF$_AQERROR_F"."CHAIN_NO" AS "CHAIN_NO", 
+"AQ$_DEF$_AQERROR_F"."LOCAL_ORDER_NO" AS "LOCAL_ORDER_NO", 
+"AQ$_DEF$_AQERROR_F"."TIME_MANAGER_INFO" AS "TIME_MANAGER_INFO", 
+"AQ$_DEF$_AQERROR_F"."STEP_NO" AS "STEP_NO", 
+"AQ$_DEF$_AQERROR_F"."USER_DATA" AS "USER_DATA", 
+"AQ$_DEF$_AQERROR_F"."QUEUE_ID" AS "QUEUE_ID"
+FROM "SYSTEM"."AQ$_DEF$_AQERROR_F" "AQ$_DEF$_AQERROR_F"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AQ$DEF$_AQCALL" EntityType="Self.AQ$DEF$_AQCALL" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"AQ$DEF$_AQCALL"."QUEUE" AS "QUEUE", 
+"AQ$DEF$_AQCALL"."MSG_ID" AS "MSG_ID", 
+"AQ$DEF$_AQCALL"."CORR_ID" AS "CORR_ID", 
+"AQ$DEF$_AQCALL"."MSG_PRIORITY" AS "MSG_PRIORITY", 
+"AQ$DEF$_AQCALL"."MSG_STATE" AS "MSG_STATE", 
+"AQ$DEF$_AQCALL"."DELAY" AS "DELAY", 
+"AQ$DEF$_AQCALL"."DELAY_TIMESTAMP" AS "DELAY_TIMESTAMP", 
+"AQ$DEF$_AQCALL"."EXPIRATION" AS "EXPIRATION", 
+"AQ$DEF$_AQCALL"."ENQ_TIME" AS "ENQ_TIME", 
+"AQ$DEF$_AQCALL"."ENQ_TIMESTAMP" AS "ENQ_TIMESTAMP", 
+"AQ$DEF$_AQCALL"."ENQ_USER_ID" AS "ENQ_USER_ID", 
+"AQ$DEF$_AQCALL"."ENQ_TXN_ID" AS "ENQ_TXN_ID", 
+"AQ$DEF$_AQCALL"."DEQ_TIME" AS "DEQ_TIME", 
+"AQ$DEF$_AQCALL"."DEQ_TIMESTAMP" AS "DEQ_TIMESTAMP", 
+"AQ$DEF$_AQCALL"."DEQ_USER_ID" AS "DEQ_USER_ID", 
+"AQ$DEF$_AQCALL"."DEQ_TXN_ID" AS "DEQ_TXN_ID", 
+"AQ$DEF$_AQCALL"."RETRY_COUNT" AS "RETRY_COUNT", 
+"AQ$DEF$_AQCALL"."EXCEPTION_QUEUE_OWNER" AS "EXCEPTION_QUEUE_OWNER", 
+"AQ$DEF$_AQCALL"."EXCEPTION_QUEUE" AS "EXCEPTION_QUEUE", 
+"AQ$DEF$_AQCALL"."USER_DATA" AS "USER_DATA", 
+"AQ$DEF$_AQCALL"."ORIGINAL_QUEUE_NAME" AS "ORIGINAL_QUEUE_NAME", 
+"AQ$DEF$_AQCALL"."ORIGINAL_QUEUE_OWNER" AS "ORIGINAL_QUEUE_OWNER", 
+"AQ$DEF$_AQCALL"."EXPIRATION_REASON" AS "EXPIRATION_REASON"
+FROM "SYSTEM"."AQ$DEF$_AQCALL" "AQ$DEF$_AQCALL"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AQ$DEF$_AQERROR" EntityType="Self.AQ$DEF$_AQERROR" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"AQ$DEF$_AQERROR"."QUEUE" AS "QUEUE", 
+"AQ$DEF$_AQERROR"."MSG_ID" AS "MSG_ID", 
+"AQ$DEF$_AQERROR"."CORR_ID" AS "CORR_ID", 
+"AQ$DEF$_AQERROR"."MSG_PRIORITY" AS "MSG_PRIORITY", 
+"AQ$DEF$_AQERROR"."MSG_STATE" AS "MSG_STATE", 
+"AQ$DEF$_AQERROR"."DELAY" AS "DELAY", 
+"AQ$DEF$_AQERROR"."DELAY_TIMESTAMP" AS "DELAY_TIMESTAMP", 
+"AQ$DEF$_AQERROR"."EXPIRATION" AS "EXPIRATION", 
+"AQ$DEF$_AQERROR"."ENQ_TIME" AS "ENQ_TIME", 
+"AQ$DEF$_AQERROR"."ENQ_TIMESTAMP" AS "ENQ_TIMESTAMP", 
+"AQ$DEF$_AQERROR"."ENQ_USER_ID" AS "ENQ_USER_ID", 
+"AQ$DEF$_AQERROR"."ENQ_TXN_ID" AS "ENQ_TXN_ID", 
+"AQ$DEF$_AQERROR"."DEQ_TIME" AS "DEQ_TIME", 
+"AQ$DEF$_AQERROR"."DEQ_TIMESTAMP" AS "DEQ_TIMESTAMP", 
+"AQ$DEF$_AQERROR"."DEQ_USER_ID" AS "DEQ_USER_ID", 
+"AQ$DEF$_AQERROR"."DEQ_TXN_ID" AS "DEQ_TXN_ID", 
+"AQ$DEF$_AQERROR"."RETRY_COUNT" AS "RETRY_COUNT", 
+"AQ$DEF$_AQERROR"."EXCEPTION_QUEUE_OWNER" AS "EXCEPTION_QUEUE_OWNER", 
+"AQ$DEF$_AQERROR"."EXCEPTION_QUEUE" AS "EXCEPTION_QUEUE", 
+"AQ$DEF$_AQERROR"."USER_DATA" AS "USER_DATA", 
+"AQ$DEF$_AQERROR"."ORIGINAL_QUEUE_NAME" AS "ORIGINAL_QUEUE_NAME", 
+"AQ$DEF$_AQERROR"."ORIGINAL_QUEUE_OWNER" AS "ORIGINAL_QUEUE_OWNER", 
+"AQ$DEF$_AQERROR"."EXPIRATION_REASON" AS "EXPIRATION_REASON"
+FROM "SYSTEM"."AQ$DEF$_AQERROR" "AQ$DEF$_AQERROR"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CHECK_DELETE_VALID_RES" EntityType="Self.CHECK_DELETE_VALID_RES" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"CHECK_DELETE_VALID_RES"."RES_ID" AS "RES_ID", 
+"CHECK_DELETE_VALID_RES"."ROOM_NO" AS "ROOM_NO", 
+"CHECK_DELETE_VALID_RES"."ADMIN_ID" AS "ADMIN_ID", 
+"CHECK_DELETE_VALID_RES"."CUST_ID" AS "CUST_ID", 
+"CHECK_DELETE_VALID_RES"."DATE_ARRIVE" AS "DATE_ARRIVE", 
+"CHECK_DELETE_VALID_RES"."DATE_DEPART" AS "DATE_DEPART", 
+"CHECK_DELETE_VALID_RES"."TOTAL_COST" AS "TOTAL_COST", 
+"CHECK_DELETE_VALID_RES"."CHECK_IN" AS "CHECK_IN", 
+"CHECK_DELETE_VALID_RES"."CHECK_OUT" AS "CHECK_OUT", 
+"CHECK_DELETE_VALID_RES"."RES_STATUS" AS "RES_STATUS"
+FROM "SYSTEM"."CHECK_DELETE_VALID_RES" "CHECK_DELETE_VALID_RES"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CHECK_OUT_VIEW" EntityType="Self.CHECK_OUT_VIEW" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"CHECK_OUT_VIEW"."RES_ID" AS "RES_ID", 
+"CHECK_OUT_VIEW"."FORENAME" AS "FORENAME", 
+"CHECK_OUT_VIEW"."SURNAME" AS "SURNAME"
+FROM "SYSTEM"."CHECK_OUT_VIEW" "CHECK_OUT_VIEW"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DELETERESERVATION_VIEW" EntityType="Self.DELETERESERVATION_VIEW" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"DELETERESERVATION_VIEW"."RES_ID" AS "RES_ID", 
+"DELETERESERVATION_VIEW"."FORENAME" AS "FORENAME", 
+"DELETERESERVATION_VIEW"."SURNAME" AS "SURNAME"
+FROM "SYSTEM"."DELETERESERVATION_VIEW" "DELETERESERVATION_VIEW"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="GET_ALL_DETAILS_FOR_CANCEL" EntityType="Self.GET_ALL_DETAILS_FOR_CANCEL" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"GET_ALL_DETAILS_FOR_CANCEL"."RES_ID" AS "RES_ID", 
+"GET_ALL_DETAILS_FOR_CANCEL"."FORENAME" AS "FORENAME", 
+"GET_ALL_DETAILS_FOR_CANCEL"."SURNAME" AS "SURNAME", 
+"GET_ALL_DETAILS_FOR_CANCEL"."DATE_ARRIVE" AS "DATE_ARRIVE", 
+"GET_ALL_DETAILS_FOR_CANCEL"."DATE_DEPART" AS "DATE_DEPART", 
+"GET_ALL_DETAILS_FOR_CANCEL"."EMAIL" AS "EMAIL"
+FROM "SYSTEM"."GET_ALL_DETAILS_FOR_CANCEL" "GET_ALL_DETAILS_FOR_CANCEL"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="GET_CUST_NAME_FOR_CANCEL" EntityType="Self.GET_CUST_NAME_FOR_CANCEL" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"GET_CUST_NAME_FOR_CANCEL"."RES_ID" AS "RES_ID", 
+"GET_CUST_NAME_FOR_CANCEL"."FORENAME" AS "FORENAME", 
+"GET_CUST_NAME_FOR_CANCEL"."SURNAME" AS "SURNAME"
+FROM "SYSTEM"."GET_CUST_NAME_FOR_CANCEL" "GET_CUST_NAME_FOR_CANCEL"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MVIEW_EVALUATIONS" EntityType="Self.MVIEW_EVALUATIONS" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"MVIEW_EVALUATIONS"."RUNID" AS "RUNID", 
+"MVIEW_EVALUATIONS"."MVIEW_OWNER" AS "MVIEW_OWNER", 
+"MVIEW_EVALUATIONS"."MVIEW_NAME" AS "MVIEW_NAME", 
+"MVIEW_EVALUATIONS"."RANK" AS "RANK", 
+"MVIEW_EVALUATIONS"."STORAGE_IN_BYTES" AS "STORAGE_IN_BYTES", 
+"MVIEW_EVALUATIONS"."FREQUENCY" AS "FREQUENCY", 
+"MVIEW_EVALUATIONS"."CUMULATIVE_BENEFIT" AS "CUMULATIVE_BENEFIT", 
+"MVIEW_EVALUATIONS"."BENEFIT_TO_COST_RATIO" AS "BENEFIT_TO_COST_RATIO"
+FROM "SYSTEM"."MVIEW_EVALUATIONS" "MVIEW_EVALUATIONS"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MVIEW_FILTER" EntityType="Self.MVIEW_FILTER" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"MVIEW_FILTER"."FILTERID" AS "FILTERID", 
+"MVIEW_FILTER"."SUBFILTERNUM" AS "SUBFILTERNUM", 
+"MVIEW_FILTER"."SUBFILTERTYPE" AS "SUBFILTERTYPE", 
+"MVIEW_FILTER"."STR_VALUE" AS "STR_VALUE", 
+"MVIEW_FILTER"."NUM_VALUE1" AS "NUM_VALUE1", 
+"MVIEW_FILTER"."NUM_VALUE2" AS "NUM_VALUE2", 
+"MVIEW_FILTER"."DATE_VALUE1" AS "DATE_VALUE1", 
+"MVIEW_FILTER"."DATE_VALUE2" AS "DATE_VALUE2"
+FROM "SYSTEM"."MVIEW_FILTER" "MVIEW_FILTER"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MVIEW_FILTERINSTANCE" EntityType="Self.MVIEW_FILTERINSTANCE" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"MVIEW_FILTERINSTANCE"."RUNID" AS "RUNID", 
+"MVIEW_FILTERINSTANCE"."FILTERID" AS "FILTERID", 
+"MVIEW_FILTERINSTANCE"."SUBFILTERNUM" AS "SUBFILTERNUM", 
+"MVIEW_FILTERINSTANCE"."SUBFILTERTYPE" AS "SUBFILTERTYPE", 
+"MVIEW_FILTERINSTANCE"."STR_VALUE" AS "STR_VALUE", 
+"MVIEW_FILTERINSTANCE"."NUM_VALUE1" AS "NUM_VALUE1", 
+"MVIEW_FILTERINSTANCE"."NUM_VALUE2" AS "NUM_VALUE2", 
+"MVIEW_FILTERINSTANCE"."DATE_VALUE1" AS "DATE_VALUE1", 
+"MVIEW_FILTERINSTANCE"."DATE_VALUE2" AS "DATE_VALUE2"
+FROM "SYSTEM"."MVIEW_FILTERINSTANCE" "MVIEW_FILTERINSTANCE"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MVIEW_LOG" EntityType="Self.MVIEW_LOG" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"MVIEW_LOG"."ID" AS "ID", 
+"MVIEW_LOG"."FILTERID" AS "FILTERID", 
+"MVIEW_LOG"."RUN_BEGIN" AS "RUN_BEGIN", 
+"MVIEW_LOG"."RUN_END" AS "RUN_END", 
+"MVIEW_LOG"."TYPE" AS "TYPE", 
+"MVIEW_LOG"."STATUS" AS "STATUS", 
+"MVIEW_LOG"."MESSAGE" AS "MESSAGE", 
+"MVIEW_LOG"."COMPLETED" AS "COMPLETED", 
+"MVIEW_LOG"."TOTAL" AS "TOTAL", 
+"MVIEW_LOG"."ERROR_CODE" AS "ERROR_CODE"
+FROM "SYSTEM"."MVIEW_LOG" "MVIEW_LOG"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MVIEW_RECOMMENDATIONS" EntityType="Self.MVIEW_RECOMMENDATIONS" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"MVIEW_RECOMMENDATIONS"."RUNID" AS "RUNID", 
+"MVIEW_RECOMMENDATIONS"."ALL_TABLES" AS "ALL_TABLES", 
+"MVIEW_RECOMMENDATIONS"."FACT_TABLES" AS "FACT_TABLES", 
+"MVIEW_RECOMMENDATIONS"."GROUPING_LEVELS" AS "GROUPING_LEVELS", 
+"MVIEW_RECOMMENDATIONS"."QUERY_TEXT" AS "QUERY_TEXT", 
+"MVIEW_RECOMMENDATIONS"."RECOMMENDATION_NUMBER" AS "RECOMMENDATION_NUMBER", 
+"MVIEW_RECOMMENDATIONS"."RECOMMENDED_ACTION" AS "RECOMMENDED_ACTION", 
+"MVIEW_RECOMMENDATIONS"."MVIEW_OWNER" AS "MVIEW_OWNER", 
+"MVIEW_RECOMMENDATIONS"."MVIEW_NAME" AS "MVIEW_NAME", 
+"MVIEW_RECOMMENDATIONS"."STORAGE_IN_BYTES" AS "STORAGE_IN_BYTES", 
+"MVIEW_RECOMMENDATIONS"."PCT_PERFORMANCE_GAIN" AS "PCT_PERFORMANCE_GAIN", 
+"MVIEW_RECOMMENDATIONS"."BENEFIT_TO_COST_RATIO" AS "BENEFIT_TO_COST_RATIO"
+FROM "SYSTEM"."MVIEW_RECOMMENDATIONS" "MVIEW_RECOMMENDATIONS"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MVIEW_WORKLOAD" EntityType="Self.MVIEW_WORKLOAD" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"MVIEW_WORKLOAD"."WORKLOADID" AS "WORKLOADID", 
+"MVIEW_WORKLOAD"."IMPORT_TIME" AS "IMPORT_TIME", 
+"MVIEW_WORKLOAD"."QUERYID" AS "QUERYID", 
+"MVIEW_WORKLOAD"."APPLICATION" AS "APPLICATION", 
+"MVIEW_WORKLOAD"."CARDINALITY" AS "CARDINALITY", 
+"MVIEW_WORKLOAD"."RESULTSIZE" AS "RESULTSIZE", 
+"MVIEW_WORKLOAD"."LASTUSE" AS "LASTUSE", 
+"MVIEW_WORKLOAD"."FREQUENCY" AS "FREQUENCY", 
+"MVIEW_WORKLOAD"."OWNER" AS "OWNER", 
+"MVIEW_WORKLOAD"."PRIORITY" AS "PRIORITY", 
+"MVIEW_WORKLOAD"."QUERY" AS "QUERY", 
+"MVIEW_WORKLOAD"."RESPONSETIME" AS "RESPONSETIME"
+FROM "SYSTEM"."MVIEW_WORKLOAD" "MVIEW_WORKLOAD"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PRODUCT_PRIVS" EntityType="Self.PRODUCT_PRIVS" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"PRODUCT_PRIVS"."PRODUCT" AS "PRODUCT", 
+"PRODUCT_PRIVS"."USERID" AS "USERID", 
+"PRODUCT_PRIVS"."ATTRIBUTE" AS "ATTRIBUTE", 
+"PRODUCT_PRIVS"."SCOPE" AS "SCOPE", 
+"PRODUCT_PRIVS"."NUMERIC_VALUE" AS "NUMERIC_VALUE", 
+"PRODUCT_PRIVS"."CHAR_VALUE" AS "CHAR_VALUE", 
+"PRODUCT_PRIVS"."DATE_VALUE" AS "DATE_VALUE", 
+"PRODUCT_PRIVS"."LONG_VALUE" AS "LONG_VALUE"
+FROM "SYSTEM"."PRODUCT_PRIVS" "PRODUCT_PRIVS"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ROOMS_NOT_CURRENTLY_IN_USE" EntityType="Self.ROOMS_NOT_CURRENTLY_IN_USE" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"ROOMS_NOT_CURRENTLY_IN_USE"."ROOM_NO" AS "ROOM_NO", 
+"ROOMS_NOT_CURRENTLY_IN_USE"."ROOM_TYPE" AS "ROOM_TYPE", 
+"ROOMS_NOT_CURRENTLY_IN_USE"."STATUS" AS "STATUS"
+FROM "SYSTEM"."ROOMS_NOT_CURRENTLY_IN_USE" "ROOMS_NOT_CURRENTLY_IN_USE"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SIMPLERIIMRATE" EntityType="Self.SIMPLERIIMRATE" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"SIMPLERIIMRATE"."ROOM_TYPE" AS "ROOM_TYPE", 
+"SIMPLERIIMRATE"."DESCRIPTION" AS "DESCRIPTION", 
+"SIMPLERIIMRATE"."RATE" AS "RATE"
+FROM "SYSTEM"."SIMPLERIIMRATE" "SIMPLERIIMRATE"</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_RESERVATIONS_ADMINS" Association="Self.FK_RESERVATIONS_ADMINS">
+            <End Role="ADMINS" EntitySet="ADMINS" />
+            <End Role="RESERVATIONS" EntitySet="RESERVATIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESERVATIONS_CUSTOMERS" Association="Self.FK_RESERVATIONS_CUSTOMERS">
+            <End Role="CUSTOMERS" EntitySet="CUSTOMERS" />
+            <End Role="RESERVATIONS" EntitySet="RESERVATIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESERVATIONS_ROOMS" Association="Self.FK_RESERVATIONS_ROOMS">
+            <End Role="ROOMS" EntitySet="ROOMS" />
+            <End Role="RESERVATIONS" EntitySet="RESERVATIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ROOMS_ROOMRATES" Association="Self.FK_ROOMS_ROOMRATES">
+            <End Role="ROOMRATES" EntitySet="ROOMRATES" />
+            <End Role="ROOMS" EntitySet="ROOMS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="ADMIN_ID" />
+          </Key>
+          <Property Name="ADMIN_ID" Type="Byte" Nullable="false" />
+          <Property Name="USERNAME" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FAILED_ATTEMPTS" Type="Boolean" />
+          <Property Name="BLOCK_TIME" Type="DateTime" Precision="6" />
+          <NavigationProperty Name="RESERVATIONS" Relationship="Self.FK_RESERVATIONS_ADMINS" FromRole="ADMINS" ToRole="RESERVATIONS" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="CUST_ID" />
+          </Key>
+          <Property Name="CUST_ID" Type="Int32" Nullable="false" />
+          <Property Name="FORENAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MOBILE_NO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="LOYALTY" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RESERVATIONS" Relationship="Self.FK_RESERVATIONS_CUSTOMERS" FromRole="CUSTOMERS" ToRole="RESERVATIONS" />
+        </EntityType>
+        <EntityType Name="RESERVATION">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+          </Key>
+          <Property Name="RES_ID" Type="Int32" Nullable="false" />
+          <Property Name="ROOM_NO" Type="Byte" Nullable="false" />
+          <Property Name="ADMIN_ID" Type="Byte" Nullable="false" />
+          <Property Name="CUST_ID" Type="Int32" Nullable="false" />
+          <Property Name="DATE_ARRIVE" Type="DateTime" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="DateTime" Nullable="false" />
+          <Property Name="TOTAL_COST" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="CHECK_IN" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CHECK_OUT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RES_STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ADMIN" Relationship="Self.FK_RESERVATIONS_ADMINS" FromRole="RESERVATIONS" ToRole="ADMINS" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_RESERVATIONS_CUSTOMERS" FromRole="RESERVATIONS" ToRole="CUSTOMERS" />
+          <NavigationProperty Name="ROOM" Relationship="Self.FK_RESERVATIONS_ROOMS" FromRole="RESERVATIONS" ToRole="ROOMS" />
+        </EntityType>
+        <EntityType Name="ROOMRATE">
+          <Key>
+            <PropertyRef Name="ROOM_TYPE" />
+          </Key>
+          <Property Name="ROOM_TYPE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RATE" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <NavigationProperty Name="ROOMS" Relationship="Self.FK_ROOMS_ROOMRATES" FromRole="ROOMRATES" ToRole="ROOMS" />
+        </EntityType>
+        <EntityType Name="ROOM">
+          <Key>
+            <PropertyRef Name="ROOM_NO" />
+          </Key>
+          <Property Name="ROOM_NO" Type="Byte" Nullable="false" />
+          <Property Name="ROOM_TYPE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="RESERVATIONS" Relationship="Self.FK_RESERVATIONS_ROOMS" FromRole="ROOMS" ToRole="RESERVATIONS" />
+          <NavigationProperty Name="ROOMRATE" Relationship="Self.FK_ROOMS_ROOMRATES" FromRole="ROOMS" ToRole="ROOMRATES" />
+        </EntityType>
+        <EntityType Name="ALL_CHECK_INS_TODAY">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+            <PropertyRef Name="ROOM_NO" />
+            <PropertyRef Name="ADMIN_ID" />
+            <PropertyRef Name="CUST_ID" />
+            <PropertyRef Name="DATE_ARRIVE" />
+            <PropertyRef Name="DATE_DEPART" />
+            <PropertyRef Name="TOTAL_COST" />
+            <PropertyRef Name="CHECK_IN" />
+            <PropertyRef Name="CHECK_OUT" />
+            <PropertyRef Name="RES_STATUS" />
+          </Key>
+          <Property Name="RES_ID" Type="Int32" Nullable="false" />
+          <Property Name="ROOM_NO" Type="Byte" Nullable="false" />
+          <Property Name="ADMIN_ID" Type="Byte" Nullable="false" />
+          <Property Name="CUST_ID" Type="Int32" Nullable="false" />
+          <Property Name="DATE_ARRIVE" Type="DateTime" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="DateTime" Nullable="false" />
+          <Property Name="TOTAL_COST" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="CHECK_IN" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CHECK_OUT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RES_STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AQ__DEF__AQCALL_F">
+          <Key>
+            <PropertyRef Name="ENQ_TID" />
+            <PropertyRef Name="STEP_NO" />
+            <PropertyRef Name="QUEUE_ID" />
+          </Key>
+          <Property Name="Q_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ROW_ID" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="MSGID" Type="Guid" />
+          <Property Name="CORRID" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="PRIORITY" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="STATE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DELAY" Type="DateTime" Precision="6" />
+          <Property Name="EXPIRATION" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ENQ_TIME" Type="DateTime" Precision="6" />
+          <Property Name="ENQ_UID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ENQ_TID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DEQ_TIME" Type="DateTime" Precision="6" />
+          <Property Name="DEQ_UID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DEQ_TID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RETRY_COUNT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="EXCEPTION_QSCHEMA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EXCEPTION_QUEUE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="CSCN" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DSCN" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CHAIN_NO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="LOCAL_ORDER_NO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="TIME_MANAGER_INFO" Type="DateTime" Precision="6" />
+          <Property Name="STEP_NO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USER_DATA" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="QUEUE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AQ__DEF__AQERROR_F">
+          <Key>
+            <PropertyRef Name="ENQ_TID" />
+            <PropertyRef Name="STEP_NO" />
+            <PropertyRef Name="QUEUE_ID" />
+          </Key>
+          <Property Name="Q_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ROW_ID" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="MSGID" Type="Guid" />
+          <Property Name="CORRID" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="PRIORITY" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="STATE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DELAY" Type="DateTime" Precision="6" />
+          <Property Name="EXPIRATION" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ENQ_TIME" Type="DateTime" Precision="6" />
+          <Property Name="ENQ_UID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ENQ_TID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DEQ_TIME" Type="DateTime" Precision="6" />
+          <Property Name="DEQ_UID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DEQ_TID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RETRY_COUNT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="EXCEPTION_QSCHEMA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EXCEPTION_QUEUE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="CSCN" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DSCN" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CHAIN_NO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="LOCAL_ORDER_NO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="TIME_MANAGER_INFO" Type="DateTime" Precision="6" />
+          <Property Name="STEP_NO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USER_DATA" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="QUEUE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AQ_DEF__AQCALL">
+          <Key>
+            <PropertyRef Name="ENQ_TXN_ID" />
+          </Key>
+          <Property Name="QUEUE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MSG_ID" Type="Guid" />
+          <Property Name="CORR_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="MSG_PRIORITY" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="MSG_STATE" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="DELAY" Type="DateTime" />
+          <Property Name="DELAY_TIMESTAMP" Type="DateTime" Precision="6" />
+          <Property Name="EXPIRATION" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ENQ_TIME" Type="DateTime" />
+          <Property Name="ENQ_TIMESTAMP" Type="DateTime" Precision="6" />
+          <Property Name="ENQ_USER_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ENQ_TXN_ID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DEQ_TIME" Type="DateTime" />
+          <Property Name="DEQ_TIMESTAMP" Type="DateTime" Precision="6" />
+          <Property Name="DEQ_USER_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DEQ_TXN_ID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RETRY_COUNT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="EXCEPTION_QUEUE_OWNER" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EXCEPTION_QUEUE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="USER_DATA" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ORIGINAL_QUEUE_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ORIGINAL_QUEUE_OWNER" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EXPIRATION_REASON" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="AQ_DEF__AQERROR">
+          <Key>
+            <PropertyRef Name="ENQ_TXN_ID" />
+          </Key>
+          <Property Name="QUEUE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MSG_ID" Type="Guid" />
+          <Property Name="CORR_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="MSG_PRIORITY" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="MSG_STATE" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="DELAY" Type="DateTime" />
+          <Property Name="DELAY_TIMESTAMP" Type="DateTime" Precision="6" />
+          <Property Name="EXPIRATION" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ENQ_TIME" Type="DateTime" />
+          <Property Name="ENQ_TIMESTAMP" Type="DateTime" Precision="6" />
+          <Property Name="ENQ_USER_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ENQ_TXN_ID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DEQ_TIME" Type="DateTime" />
+          <Property Name="DEQ_TIMESTAMP" Type="DateTime" Precision="6" />
+          <Property Name="DEQ_USER_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DEQ_TXN_ID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RETRY_COUNT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="EXCEPTION_QUEUE_OWNER" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EXCEPTION_QUEUE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="USER_DATA" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ORIGINAL_QUEUE_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ORIGINAL_QUEUE_OWNER" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EXPIRATION_REASON" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CHECK_DELETE_VALID_RES">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+            <PropertyRef Name="ROOM_NO" />
+            <PropertyRef Name="ADMIN_ID" />
+            <PropertyRef Name="CUST_ID" />
+            <PropertyRef Name="DATE_ARRIVE" />
+            <PropertyRef Name="DATE_DEPART" />
+            <PropertyRef Name="TOTAL_COST" />
+            <PropertyRef Name="CHECK_IN" />
+            <PropertyRef Name="CHECK_OUT" />
+            <PropertyRef Name="RES_STATUS" />
+          </Key>
+          <Property Name="RES_ID" Type="Int32" Nullable="false" />
+          <Property Name="ROOM_NO" Type="Byte" Nullable="false" />
+          <Property Name="ADMIN_ID" Type="Byte" Nullable="false" />
+          <Property Name="CUST_ID" Type="Int32" Nullable="false" />
+          <Property Name="DATE_ARRIVE" Type="DateTime" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="DateTime" Nullable="false" />
+          <Property Name="TOTAL_COST" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="CHECK_IN" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CHECK_OUT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RES_STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CHECK_OUT_VIEW">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+            <PropertyRef Name="FORENAME" />
+            <PropertyRef Name="SURNAME" />
+          </Key>
+          <Property Name="RES_ID" Type="Int32" Nullable="false" />
+          <Property Name="FORENAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DELETERESERVATION_VIEW">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+            <PropertyRef Name="FORENAME" />
+            <PropertyRef Name="SURNAME" />
+          </Key>
+          <Property Name="RES_ID" Type="Int32" Nullable="false" />
+          <Property Name="FORENAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GET_ALL_DETAILS_FOR_CANCEL">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+            <PropertyRef Name="FORENAME" />
+            <PropertyRef Name="SURNAME" />
+            <PropertyRef Name="DATE_ARRIVE" />
+            <PropertyRef Name="DATE_DEPART" />
+          </Key>
+          <Property Name="RES_ID" Type="Int32" Nullable="false" />
+          <Property Name="FORENAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATE_ARRIVE" Type="DateTime" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="DateTime" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="GET_CUST_NAME_FOR_CANCEL">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+            <PropertyRef Name="FORENAME" />
+            <PropertyRef Name="SURNAME" />
+          </Key>
+          <Property Name="RES_ID" Type="Int32" Nullable="false" />
+          <Property Name="FORENAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MVIEW_EVALUATIONS">
+          <Key>
+            <PropertyRef Name="RUNID" />
+            <PropertyRef Name="RANK" />
+            <PropertyRef Name="BENEFIT_TO_COST_RATIO" />
+          </Key>
+          <Property Name="RUNID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="MVIEW_OWNER" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MVIEW_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RANK" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="STORAGE_IN_BYTES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="FREQUENCY" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CUMULATIVE_BENEFIT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="BENEFIT_TO_COST_RATIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MVIEW_FILTER">
+          <Key>
+            <PropertyRef Name="FILTERID" />
+            <PropertyRef Name="SUBFILTERNUM" />
+          </Key>
+          <Property Name="FILTERID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="SUBFILTERNUM" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="SUBFILTERTYPE" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="STR_VALUE" Type="String" MaxLength="1028" FixedLength="false" Unicode="false" />
+          <Property Name="NUM_VALUE1" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="NUM_VALUE2" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DATE_VALUE1" Type="DateTime" />
+          <Property Name="DATE_VALUE2" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="MVIEW_FILTERINSTANCE">
+          <Key>
+            <PropertyRef Name="RUNID" />
+          </Key>
+          <Property Name="RUNID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FILTERID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="SUBFILTERNUM" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="SUBFILTERTYPE" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="STR_VALUE" Type="String" MaxLength="1028" FixedLength="false" Unicode="false" />
+          <Property Name="NUM_VALUE1" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="NUM_VALUE2" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DATE_VALUE1" Type="DateTime" />
+          <Property Name="DATE_VALUE2" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="MVIEW_LOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FILTERID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="RUN_BEGIN" Type="DateTime" />
+          <Property Name="RUN_END" Type="DateTime" />
+          <Property Name="TYPE" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="MESSAGE" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="COMPLETED" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="TOTAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ERROR_CODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MVIEW_RECOMMENDATIONS">
+          <Key>
+            <PropertyRef Name="RUNID" />
+            <PropertyRef Name="RECOMMENDATION_NUMBER" />
+            <PropertyRef Name="BENEFIT_TO_COST_RATIO" />
+          </Key>
+          <Property Name="RUNID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ALL_TABLES" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="FACT_TABLES" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="GROUPING_LEVELS" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="QUERY_TEXT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RECOMMENDATION_NUMBER" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RECOMMENDED_ACTION" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="MVIEW_OWNER" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MVIEW_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="STORAGE_IN_BYTES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PCT_PERFORMANCE_GAIN" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="BENEFIT_TO_COST_RATIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MVIEW_WORKLOAD">
+          <Key>
+            <PropertyRef Name="WORKLOADID" />
+            <PropertyRef Name="IMPORT_TIME" />
+            <PropertyRef Name="QUERYID" />
+            <PropertyRef Name="OWNER" />
+            <PropertyRef Name="QUERY" />
+          </Key>
+          <Property Name="WORKLOADID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="IMPORT_TIME" Type="DateTime" Nullable="false" />
+          <Property Name="QUERYID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="APPLICATION" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CARDINALITY" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="RESULTSIZE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="LASTUSE" Type="DateTime" />
+          <Property Name="FREQUENCY" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="OWNER" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRIORITY" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="QUERY" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RESPONSETIME" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="PRODUCT_PRIVS">
+          <Key>
+            <PropertyRef Name="PRODUCT" />
+          </Key>
+          <Property Name="PRODUCT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USERID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ATTRIBUTE" Type="String" MaxLength="240" FixedLength="false" Unicode="false" />
+          <Property Name="SCOPE" Type="String" MaxLength="240" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERIC_VALUE" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="CHAR_VALUE" Type="String" MaxLength="240" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_VALUE" Type="DateTime" />
+          <Property Name="LONG_VALUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ROOMS_NOT_CURRENTLY_IN_USE">
+          <Key>
+            <PropertyRef Name="ROOM_NO" />
+            <PropertyRef Name="ROOM_TYPE" />
+            <PropertyRef Name="STATUS" />
+          </Key>
+          <Property Name="ROOM_NO" Type="Byte" Nullable="false" />
+          <Property Name="ROOM_TYPE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_RESERVATIONS_ADMINS">
+          <End Role="ADMINS" Type="Self.ADMIN" Multiplicity="1" />
+          <End Role="RESERVATIONS" Type="Self.RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADMINS">
+              <PropertyRef Name="ADMIN_ID" />
+            </Principal>
+            <Dependent Role="RESERVATIONS">
+              <PropertyRef Name="ADMIN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESERVATIONS_CUSTOMERS">
+          <End Role="CUSTOMERS" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="RESERVATIONS" Type="Self.RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMERS">
+              <PropertyRef Name="CUST_ID" />
+            </Principal>
+            <Dependent Role="RESERVATIONS">
+              <PropertyRef Name="CUST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESERVATIONS_ROOMS">
+          <End Role="ROOMS" Type="Self.ROOM" Multiplicity="1" />
+          <End Role="RESERVATIONS" Type="Self.RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOMS">
+              <PropertyRef Name="ROOM_NO" />
+            </Principal>
+            <Dependent Role="RESERVATIONS">
+              <PropertyRef Name="ROOM_NO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ROOMS_ROOMRATES">
+          <End Role="ROOMRATES" Type="Self.ROOMRATE" Multiplicity="1" />
+          <End Role="ROOMS" Type="Self.ROOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOMRATES">
+              <PropertyRef Name="ROOM_TYPE" />
+            </Principal>
+            <Dependent Role="ROOMS">
+              <PropertyRef Name="ROOM_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADMINS" EntityType="Self.ADMIN" />
+          <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMER" />
+          <EntitySet Name="RESERVATIONS" EntityType="Self.RESERVATION" />
+          <EntitySet Name="ROOMRATES" EntityType="Self.ROOMRATE" />
+          <EntitySet Name="ROOMS" EntityType="Self.ROOM" />
+          <EntitySet Name="ALL_CHECK_INS_TODAY" EntityType="Self.ALL_CHECK_INS_TODAY" />
+          <EntitySet Name="AQ__DEF__AQCALL_F" EntityType="Self.AQ__DEF__AQCALL_F" />
+          <EntitySet Name="AQ__DEF__AQERROR_F" EntityType="Self.AQ__DEF__AQERROR_F" />
+          <EntitySet Name="AQ_DEF__AQCALL" EntityType="Self.AQ_DEF__AQCALL" />
+          <EntitySet Name="AQ_DEF__AQERROR" EntityType="Self.AQ_DEF__AQERROR" />
+          <EntitySet Name="CHECK_DELETE_VALID_RES" EntityType="Self.CHECK_DELETE_VALID_RES" />
+          <EntitySet Name="CHECK_OUT_VIEW" EntityType="Self.CHECK_OUT_VIEW" />
+          <EntitySet Name="DELETERESERVATION_VIEW" EntityType="Self.DELETERESERVATION_VIEW" />
+          <EntitySet Name="GET_ALL_DETAILS_FOR_CANCEL" EntityType="Self.GET_ALL_DETAILS_FOR_CANCEL" />
+          <EntitySet Name="GET_CUST_NAME_FOR_CANCEL" EntityType="Self.GET_CUST_NAME_FOR_CANCEL" />
+          <EntitySet Name="MVIEW_EVALUATIONS" EntityType="Self.MVIEW_EVALUATIONS" />
+          <EntitySet Name="MVIEW_FILTER" EntityType="Self.MVIEW_FILTER" />
+          <EntitySet Name="MVIEW_FILTERINSTANCE" EntityType="Self.MVIEW_FILTERINSTANCE" />
+          <EntitySet Name="MVIEW_LOG" EntityType="Self.MVIEW_LOG" />
+          <EntitySet Name="MVIEW_RECOMMENDATIONS" EntityType="Self.MVIEW_RECOMMENDATIONS" />
+          <EntitySet Name="MVIEW_WORKLOAD" EntityType="Self.MVIEW_WORKLOAD" />
+          <EntitySet Name="PRODUCT_PRIVS" EntityType="Self.PRODUCT_PRIVS" />
+          <EntitySet Name="ROOMS_NOT_CURRENTLY_IN_USE" EntityType="Self.ROOMS_NOT_CURRENTLY_IN_USE" />
+          <AssociationSet Name="FK_RESERVATIONS_ADMINS" Association="Self.FK_RESERVATIONS_ADMINS">
+            <End Role="ADMINS" EntitySet="ADMINS" />
+            <End Role="RESERVATIONS" EntitySet="RESERVATIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESERVATIONS_CUSTOMERS" Association="Self.FK_RESERVATIONS_CUSTOMERS">
+            <End Role="CUSTOMERS" EntitySet="CUSTOMERS" />
+            <End Role="RESERVATIONS" EntitySet="RESERVATIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESERVATIONS_ROOMS" Association="Self.FK_RESERVATIONS_ROOMS">
+            <End Role="ROOMS" EntitySet="ROOMS" />
+            <End Role="RESERVATIONS" EntitySet="RESERVATIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ROOMS_ROOMRATES" Association="Self.FK_ROOMS_ROOMRATES">
+            <End Role="ROOMRATES" EntitySet="ROOMRATES" />
+            <End Role="ROOMS" EntitySet="ROOMS" />
+          </AssociationSet>
+          <FunctionImport Name="ADD_ROOM">
+            <Parameter Name="R_ROOM_NO" Mode="In" Type="Decimal" />
+            <Parameter Name="R_ROOM_TYPE" Mode="In" Type="String" />
+            <Parameter Name="R_STATUS" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ADD_ROOM_RATE">
+            <Parameter Name="R_ROOM_TYPE" Mode="In" Type="String" />
+            <Parameter Name="R_DESCRIPTION" Mode="In" Type="String" />
+            <Parameter Name="R_RATE" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ADMIN_LOGIN_CHECK">
+            <Parameter Name="GET_ENTERED_USERNAME" Mode="In" Type="String" />
+            <Parameter Name="GET_ENTERED_PASSWORD" Mode="In" Type="String" />
+            <Parameter Name="GET_EXISTING_USERNAME" Mode="Out" Type="String" />
+            <Parameter Name="GET_EXISTING_PASSWORD" Mode="Out" Type="String" />
+            <Parameter Name="GET_FAILED_ATTEMPTS" Mode="InOut" Type="Decimal" />
+            <Parameter Name="GET_BLOCKTIME" Mode="Out" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="CANCEL_RESERVATION">
+            <Parameter Name="R_OUTPUT_RES_ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="R_INPUT_RES_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="R_DATE_DEPART" Mode="Out" Type="DateTime" />
+            <Parameter Name="R_DATE_ARRIVE" Mode="Out" Type="DateTime" />
+            <Parameter Name="C_SURNAME" Mode="Out" Type="String" />
+            <Parameter Name="C_FORENAME" Mode="Out" Type="String" />
+            <Parameter Name="C_EMAIL" Mode="Out" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CHECK_IN">
+            <Parameter Name="RE_RES_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="RE_CHECK_IN" Mode="In" Type="String" />
+            <Parameter Name="R_RES_ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="C_FORENAME" Mode="Out" Type="String" />
+            <Parameter Name="C_SURNAME" Mode="Out" Type="String" />
+            <Parameter Name="R_DATE_ARRIVE" Mode="Out" Type="DateTime" />
+            <Parameter Name="R_DATE_DEPART" Mode="Out" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="CHECK_OUT">
+            <Parameter Name="RE_RES_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="R_RES_ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="C_FORENAME" Mode="Out" Type="String" />
+            <Parameter Name="C_SURNAME" Mode="Out" Type="String" />
+            <Parameter Name="R_DATE_ARRIVE" Mode="Out" Type="DateTime" />
+            <Parameter Name="R_DATE_DEPART" Mode="Out" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_MAKERESERVATION">
+            <Parameter Name="RES_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="I_ROOM_NO" Mode="In" Type="Decimal" />
+            <Parameter Name="ADMIN_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="DATE_ARRIVE" Mode="In" Type="DateTime" />
+            <Parameter Name="DATE_DEPART" Mode="In" Type="DateTime" />
+            <Parameter Name="TOTAL_COST" Mode="InOut" Type="Decimal" />
+            <Parameter Name="CHECK_IN" Mode="In" Type="String" />
+            <Parameter Name="CHECK_OUT" Mode="In" Type="String" />
+            <Parameter Name="RES_STATUS" Mode="In" Type="String" />
+            <Parameter Name="I_CUST_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="RESULT1" Mode="Out" Type="Decimal" />
+            <Parameter Name="CUSTOMERLOYALTYSTATUS" Mode="Out" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_NORESBONUS" />
+          <FunctionImport Name="SP_SEARCHAVAILABLEROOM">
+            <Parameter Name="I_ROOM_TYPE" Mode="In" Type="String" />
+            <Parameter Name="I_ARRIVAL_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="I_DEPARTURE_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="O_ROOM_NO" Mode="Out" Type="Decimal" />
+            <Parameter Name="O_ROOM_TYPE" Mode="Out" Type="String" />
+            <Parameter Name="O_STATUS" Mode="Out" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SEARCHEXISTINGCUST">
+            <Parameter Name="C_FORENAME" Mode="In" Type="String" />
+            <Parameter Name="O_CUST_ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="O_FORENAME" Mode="Out" Type="String" />
+            <Parameter Name="O_SURNAME" Mode="Out" Type="String" />
+            <Parameter Name="O_DOB" Mode="Out" Type="DateTime" />
+            <Parameter Name="O_EMAIL" Mode="Out" Type="String" />
+            <Parameter Name="O_MOBILE_NO" Mode="Out" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="MAKE_RESERVATION">
+            <Parameter Name="RES_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="I_ROOM_NO" Mode="In" Type="Decimal" />
+            <Parameter Name="ADMIN_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="DATE_ARRIVE" Mode="In" Type="DateTime" />
+            <Parameter Name="DATE_DEPART" Mode="In" Type="DateTime" />
+            <Parameter Name="TOTAL_COST" Mode="InOut" Type="Decimal" />
+            <Parameter Name="CHECK_IN" Mode="In" Type="String" />
+            <Parameter Name="CHECK_OUT" Mode="In" Type="String" />
+            <Parameter Name="RES_STATUS" Mode="In" Type="String" />
+            <Parameter Name="I_CUST_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="RESULT1" Mode="Out" Type="Decimal" />
+            <Parameter Name="CUSTOMERLOYALTYSTATUS" Mode="Out" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SEARCH_EXISTING_CUSTOMER">
+            <Parameter Name="C_FORENAME" Mode="In" Type="String" />
+            <Parameter Name="O_CUST_ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="O_FORENAME" Mode="Out" Type="String" />
+            <Parameter Name="O_SURNAME" Mode="Out" Type="String" />
+            <Parameter Name="O_DOB" Mode="Out" Type="DateTime" />
+            <Parameter Name="O_EMAIL" Mode="Out" Type="String" />
+            <Parameter Name="O_MOBILE_NO" Mode="Out" Type="String" />
+            <Parameter Name="O_LOYALTY" Mode="Out" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="SIMPLERIIMRATEs" EntityType="HotelModel.SIMPLERIIMRATE" />
+        </EntityContainer>
+        <EntityType Name="SIMPLERIIMRATE">
+          <Key>
+            <PropertyRef Name="ROOM_TYPE" />
+            <PropertyRef Name="DESCRIPTION" />
+            <PropertyRef Name="RATE" />
+          </Key>
+          <Property Name="ROOM_TYPE" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RATE" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HotelModelStoreContainer" CdmEntityContainer="HotelEntities">
+          <EntitySetMapping Name="ADMINS">
+            <EntityTypeMapping TypeName="HotelModel.ADMIN">
+              <MappingFragment StoreEntitySet="ADMINS">
+                <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="FAILED_ATTEMPTS" ColumnName="FAILED_ATTEMPTS" />
+                <ScalarProperty Name="BLOCK_TIME" ColumnName="BLOCK_TIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUSTOMERS">
+            <EntityTypeMapping TypeName="HotelModel.CUSTOMER">
+              <MappingFragment StoreEntitySet="CUSTOMERS">
+                <ScalarProperty Name="CUST_ID" ColumnName="CUST_ID" />
+                <ScalarProperty Name="FORENAME" ColumnName="FORENAME" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="MOBILE_NO" ColumnName="MOBILE_NO" />
+                <ScalarProperty Name="LOYALTY" ColumnName="LOYALTY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESERVATIONS">
+            <EntityTypeMapping TypeName="HotelModel.RESERVATION">
+              <MappingFragment StoreEntitySet="RESERVATIONS">
+                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+                <ScalarProperty Name="ROOM_NO" ColumnName="ROOM_NO" />
+                <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+                <ScalarProperty Name="CUST_ID" ColumnName="CUST_ID" />
+                <ScalarProperty Name="DATE_ARRIVE" ColumnName="DATE_ARRIVE" />
+                <ScalarProperty Name="DATE_DEPART" ColumnName="DATE_DEPART" />
+                <ScalarProperty Name="TOTAL_COST" ColumnName="TOTAL_COST" />
+                <ScalarProperty Name="CHECK_IN" ColumnName="CHECK_IN" />
+                <ScalarProperty Name="CHECK_OUT" ColumnName="CHECK_OUT" />
+                <ScalarProperty Name="RES_STATUS" ColumnName="RES_STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROOMRATES">
+            <EntityTypeMapping TypeName="HotelModel.ROOMRATE">
+              <MappingFragment StoreEntitySet="ROOMRATES">
+                <ScalarProperty Name="ROOM_TYPE" ColumnName="ROOM_TYPE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="RATE" ColumnName="RATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROOMS">
+            <EntityTypeMapping TypeName="HotelModel.ROOM">
+              <MappingFragment StoreEntitySet="ROOMS">
+                <ScalarProperty Name="ROOM_NO" ColumnName="ROOM_NO" />
+                <ScalarProperty Name="ROOM_TYPE" ColumnName="ROOM_TYPE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALL_CHECK_INS_TODAY">
+            <EntityTypeMapping TypeName="HotelModel.ALL_CHECK_INS_TODAY">
+              <MappingFragment StoreEntitySet="ALL_CHECK_INS_TODAY">
+                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+                <ScalarProperty Name="ROOM_NO" ColumnName="ROOM_NO" />
+                <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+                <ScalarProperty Name="CUST_ID" ColumnName="CUST_ID" />
+                <ScalarProperty Name="DATE_ARRIVE" ColumnName="DATE_ARRIVE" />
+                <ScalarProperty Name="DATE_DEPART" ColumnName="DATE_DEPART" />
+                <ScalarProperty Name="TOTAL_COST" ColumnName="TOTAL_COST" />
+                <ScalarProperty Name="CHECK_IN" ColumnName="CHECK_IN" />
+                <ScalarProperty Name="CHECK_OUT" ColumnName="CHECK_OUT" />
+                <ScalarProperty Name="RES_STATUS" ColumnName="RES_STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AQ__DEF__AQCALL_F">
+            <EntityTypeMapping TypeName="HotelModel.AQ__DEF__AQCALL_F">
+              <MappingFragment StoreEntitySet="AQ$_DEF$_AQCALL_F">
+                <ScalarProperty Name="Q_NAME" ColumnName="Q_NAME" />
+                <ScalarProperty Name="ROW_ID" ColumnName="ROW_ID" />
+                <ScalarProperty Name="MSGID" ColumnName="MSGID" />
+                <ScalarProperty Name="CORRID" ColumnName="CORRID" />
+                <ScalarProperty Name="PRIORITY" ColumnName="PRIORITY" />
+                <ScalarProperty Name="STATE" ColumnName="STATE" />
+                <ScalarProperty Name="DELAY" ColumnName="DELAY" />
+                <ScalarProperty Name="EXPIRATION" ColumnName="EXPIRATION" />
+                <ScalarProperty Name="ENQ_TIME" ColumnName="ENQ_TIME" />
+                <ScalarProperty Name="ENQ_UID" ColumnName="ENQ_UID" />
+                <ScalarProperty Name="ENQ_TID" ColumnName="ENQ_TID" />
+                <ScalarProperty Name="DEQ_TIME" ColumnName="DEQ_TIME" />
+                <ScalarProperty Name="DEQ_UID" ColumnName="DEQ_UID" />
+                <ScalarProperty Name="DEQ_TID" ColumnName="DEQ_TID" />
+                <ScalarProperty Name="RETRY_COUNT" ColumnName="RETRY_COUNT" />
+                <ScalarProperty Name="EXCEPTION_QSCHEMA" ColumnName="EXCEPTION_QSCHEMA" />
+                <ScalarProperty Name="EXCEPTION_QUEUE" ColumnName="EXCEPTION_QUEUE" />
+                <ScalarProperty Name="CSCN" ColumnName="CSCN" />
+                <ScalarProperty Name="DSCN" ColumnName="DSCN" />
+                <ScalarProperty Name="CHAIN_NO" ColumnName="CHAIN_NO" />
+                <ScalarProperty Name="LOCAL_ORDER_NO" ColumnName="LOCAL_ORDER_NO" />
+                <ScalarProperty Name="TIME_MANAGER_INFO" ColumnName="TIME_MANAGER_INFO" />
+                <ScalarProperty Name="STEP_NO" ColumnName="STEP_NO" />
+                <ScalarProperty Name="USER_DATA" ColumnName="USER_DATA" />
+                <ScalarProperty Name="QUEUE_ID" ColumnName="QUEUE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AQ__DEF__AQERROR_F">
+            <EntityTypeMapping TypeName="HotelModel.AQ__DEF__AQERROR_F">
+              <MappingFragment StoreEntitySet="AQ$_DEF$_AQERROR_F">
+                <ScalarProperty Name="Q_NAME" ColumnName="Q_NAME" />
+                <ScalarProperty Name="ROW_ID" ColumnName="ROW_ID" />
+                <ScalarProperty Name="MSGID" ColumnName="MSGID" />
+                <ScalarProperty Name="CORRID" ColumnName="CORRID" />
+                <ScalarProperty Name="PRIORITY" ColumnName="PRIORITY" />
+                <ScalarProperty Name="STATE" ColumnName="STATE" />
+                <ScalarProperty Name="DELAY" ColumnName="DELAY" />
+                <ScalarProperty Name="EXPIRATION" ColumnName="EXPIRATION" />
+                <ScalarProperty Name="ENQ_TIME" ColumnName="ENQ_TIME" />
+                <ScalarProperty Name="ENQ_UID" ColumnName="ENQ_UID" />
+                <ScalarProperty Name="ENQ_TID" ColumnName="ENQ_TID" />
+                <ScalarProperty Name="DEQ_TIME" ColumnName="DEQ_TIME" />
+                <ScalarProperty Name="DEQ_UID" ColumnName="DEQ_UID" />
+                <ScalarProperty Name="DEQ_TID" ColumnName="DEQ_TID" />
+                <ScalarProperty Name="RETRY_COUNT" ColumnName="RETRY_COUNT" />
+                <ScalarProperty Name="EXCEPTION_QSCHEMA" ColumnName="EXCEPTION_QSCHEMA" />
+                <ScalarProperty Name="EXCEPTION_QUEUE" ColumnName="EXCEPTION_QUEUE" />
+                <ScalarProperty Name="CSCN" ColumnName="CSCN" />
+                <ScalarProperty Name="DSCN" ColumnName="DSCN" />
+                <ScalarProperty Name="CHAIN_NO" ColumnName="CHAIN_NO" />
+                <ScalarProperty Name="LOCAL_ORDER_NO" ColumnName="LOCAL_ORDER_NO" />
+                <ScalarProperty Name="TIME_MANAGER_INFO" ColumnName="TIME_MANAGER_INFO" />
+                <ScalarProperty Name="STEP_NO" ColumnName="STEP_NO" />
+                <ScalarProperty Name="USER_DATA" ColumnName="USER_DATA" />
+                <ScalarProperty Name="QUEUE_ID" ColumnName="QUEUE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AQ_DEF__AQCALL">
+            <EntityTypeMapping TypeName="HotelModel.AQ_DEF__AQCALL">
+              <MappingFragment StoreEntitySet="AQ$DEF$_AQCALL">
+                <ScalarProperty Name="QUEUE" ColumnName="QUEUE" />
+                <ScalarProperty Name="MSG_ID" ColumnName="MSG_ID" />
+                <ScalarProperty Name="CORR_ID" ColumnName="CORR_ID" />
+                <ScalarProperty Name="MSG_PRIORITY" ColumnName="MSG_PRIORITY" />
+                <ScalarProperty Name="MSG_STATE" ColumnName="MSG_STATE" />
+                <ScalarProperty Name="DELAY" ColumnName="DELAY" />
+                <ScalarProperty Name="DELAY_TIMESTAMP" ColumnName="DELAY_TIMESTAMP" />
+                <ScalarProperty Name="EXPIRATION" ColumnName="EXPIRATION" />
+                <ScalarProperty Name="ENQ_TIME" ColumnName="ENQ_TIME" />
+                <ScalarProperty Name="ENQ_TIMESTAMP" ColumnName="ENQ_TIMESTAMP" />
+                <ScalarProperty Name="ENQ_USER_ID" ColumnName="ENQ_USER_ID" />
+                <ScalarProperty Name="ENQ_TXN_ID" ColumnName="ENQ_TXN_ID" />
+                <ScalarProperty Name="DEQ_TIME" ColumnName="DEQ_TIME" />
+                <ScalarProperty Name="DEQ_TIMESTAMP" ColumnName="DEQ_TIMESTAMP" />
+                <ScalarProperty Name="DEQ_USER_ID" ColumnName="DEQ_USER_ID" />
+                <ScalarProperty Name="DEQ_TXN_ID" ColumnName="DEQ_TXN_ID" />
+                <ScalarProperty Name="RETRY_COUNT" ColumnName="RETRY_COUNT" />
+                <ScalarProperty Name="EXCEPTION_QUEUE_OWNER" ColumnName="EXCEPTION_QUEUE_OWNER" />
+                <ScalarProperty Name="EXCEPTION_QUEUE" ColumnName="EXCEPTION_QUEUE" />
+                <ScalarProperty Name="USER_DATA" ColumnName="USER_DATA" />
+                <ScalarProperty Name="ORIGINAL_QUEUE_NAME" ColumnName="ORIGINAL_QUEUE_NAME" />
+                <ScalarProperty Name="ORIGINAL_QUEUE_OWNER" ColumnName="ORIGINAL_QUEUE_OWNER" />
+                <ScalarProperty Name="EXPIRATION_REASON" ColumnName="EXPIRATION_REASON" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AQ_DEF__AQERROR">
+            <EntityTypeMapping TypeName="HotelModel.AQ_DEF__AQERROR">
+              <MappingFragment StoreEntitySet="AQ$DEF$_AQERROR">
+                <ScalarProperty Name="QUEUE" ColumnName="QUEUE" />
+                <ScalarProperty Name="MSG_ID" ColumnName="MSG_ID" />
+                <ScalarProperty Name="CORR_ID" ColumnName="CORR_ID" />
+                <ScalarProperty Name="MSG_PRIORITY" ColumnName="MSG_PRIORITY" />
+                <ScalarProperty Name="MSG_STATE" ColumnName="MSG_STATE" />
+                <ScalarProperty Name="DELAY" ColumnName="DELAY" />
+                <ScalarProperty Name="DELAY_TIMESTAMP" ColumnName="DELAY_TIMESTAMP" />
+                <ScalarProperty Name="EXPIRATION" ColumnName="EXPIRATION" />
+                <ScalarProperty Name="ENQ_TIME" ColumnName="ENQ_TIME" />
+                <ScalarProperty Name="ENQ_TIMESTAMP" ColumnName="ENQ_TIMESTAMP" />
+                <ScalarProperty Name="ENQ_USER_ID" ColumnName="ENQ_USER_ID" />
+                <ScalarProperty Name="ENQ_TXN_ID" ColumnName="ENQ_TXN_ID" />
+                <ScalarProperty Name="DEQ_TIME" ColumnName="DEQ_TIME" />
+                <ScalarProperty Name="DEQ_TIMESTAMP" ColumnName="DEQ_TIMESTAMP" />
+                <ScalarProperty Name="DEQ_USER_ID" ColumnName="DEQ_USER_ID" />
+                <ScalarProperty Name="DEQ_TXN_ID" ColumnName="DEQ_TXN_ID" />
+                <ScalarProperty Name="RETRY_COUNT" ColumnName="RETRY_COUNT" />
+                <ScalarProperty Name="EXCEPTION_QUEUE_OWNER" ColumnName="EXCEPTION_QUEUE_OWNER" />
+                <ScalarProperty Name="EXCEPTION_QUEUE" ColumnName="EXCEPTION_QUEUE" />
+                <ScalarProperty Name="USER_DATA" ColumnName="USER_DATA" />
+                <ScalarProperty Name="ORIGINAL_QUEUE_NAME" ColumnName="ORIGINAL_QUEUE_NAME" />
+                <ScalarProperty Name="ORIGINAL_QUEUE_OWNER" ColumnName="ORIGINAL_QUEUE_OWNER" />
+                <ScalarProperty Name="EXPIRATION_REASON" ColumnName="EXPIRATION_REASON" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHECK_DELETE_VALID_RES">
+            <EntityTypeMapping TypeName="HotelModel.CHECK_DELETE_VALID_RES">
+              <MappingFragment StoreEntitySet="CHECK_DELETE_VALID_RES">
+                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+                <ScalarProperty Name="ROOM_NO" ColumnName="ROOM_NO" />
+                <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+                <ScalarProperty Name="CUST_ID" ColumnName="CUST_ID" />
+                <ScalarProperty Name="DATE_ARRIVE" ColumnName="DATE_ARRIVE" />
+                <ScalarProperty Name="DATE_DEPART" ColumnName="DATE_DEPART" />
+                <ScalarProperty Name="TOTAL_COST" ColumnName="TOTAL_COST" />
+                <ScalarProperty Name="CHECK_IN" ColumnName="CHECK_IN" />
+                <ScalarProperty Name="CHECK_OUT" ColumnName="CHECK_OUT" />
+                <ScalarProperty Name="RES_STATUS" ColumnName="RES_STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHECK_OUT_VIEW">
+            <EntityTypeMapping TypeName="HotelModel.CHECK_OUT_VIEW">
+              <MappingFragment StoreEntitySet="CHECK_OUT_VIEW">
+                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+                <ScalarProperty Name="FORENAME" ColumnName="FORENAME" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DELETERESERVATION_VIEW">
+            <EntityTypeMapping TypeName="HotelModel.DELETERESERVATION_VIEW">
+              <MappingFragment StoreEntitySet="DELETERESERVATION_VIEW">
+                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+                <ScalarProperty Name="FORENAME" ColumnName="FORENAME" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GET_ALL_DETAILS_FOR_CANCEL">
+            <EntityTypeMapping TypeName="HotelModel.GET_ALL_DETAILS_FOR_CANCEL">
+              <MappingFragment StoreEntitySet="GET_ALL_DETAILS_FOR_CANCEL">
+                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+                <ScalarProperty Name="FORENAME" ColumnName="FORENAME" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+                <ScalarProperty Name="DATE_ARRIVE" ColumnName="DATE_ARRIVE" />
+                <ScalarProperty Name="DATE_DEPART" ColumnName="DATE_DEPART" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GET_CUST_NAME_FOR_CANCEL">
+            <EntityTypeMapping TypeName="HotelModel.GET_CUST_NAME_FOR_CANCEL">
+              <MappingFragment StoreEntitySet="GET_CUST_NAME_FOR_CANCEL">
+                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+                <ScalarProperty Name="FORENAME" ColumnName="FORENAME" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MVIEW_EVALUATIONS">
+            <EntityTypeMapping TypeName="HotelModel.MVIEW_EVALUATIONS">
+              <MappingFragment StoreEntitySet="MVIEW_EVALUATIONS">
+                <ScalarProperty Name="RUNID" ColumnName="RUNID" />
+                <ScalarProperty Name="MVIEW_OWNER" ColumnName="MVIEW_OWNER" />
+                <ScalarProperty Name="MVIEW_NAME" ColumnName="MVIEW_NAME" />
+                <ScalarProperty Name="RANK" ColumnName="RANK" />
+                <ScalarProperty Name="STORAGE_IN_BYTES" ColumnName="STORAGE_IN_BYTES" />
+                <ScalarProperty Name="FREQUENCY" ColumnName="FREQUENCY" />
+                <ScalarProperty Name="CUMULATIVE_BENEFIT" ColumnName="CUMULATIVE_BENEFIT" />
+                <ScalarProperty Name="BENEFIT_TO_COST_RATIO" ColumnName="BENEFIT_TO_COST_RATIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MVIEW_FILTER">
+            <EntityTypeMapping TypeName="HotelModel.MVIEW_FILTER">
+              <MappingFragment StoreEntitySet="MVIEW_FILTER">
+                <ScalarProperty Name="FILTERID" ColumnName="FILTERID" />
+                <ScalarProperty Name="SUBFILTERNUM" ColumnName="SUBFILTERNUM" />
+                <ScalarProperty Name="SUBFILTERTYPE" ColumnName="SUBFILTERTYPE" />
+                <ScalarProperty Name="STR_VALUE" ColumnName="STR_VALUE" />
+                <ScalarProperty Name="NUM_VALUE1" ColumnName="NUM_VALUE1" />
+                <ScalarProperty Name="NUM_VALUE2" ColumnName="NUM_VALUE2" />
+                <ScalarProperty Name="DATE_VALUE1" ColumnName="DATE_VALUE1" />
+                <ScalarProperty Name="DATE_VALUE2" ColumnName="DATE_VALUE2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MVIEW_FILTERINSTANCE">
+            <EntityTypeMapping TypeName="HotelModel.MVIEW_FILTERINSTANCE">
+              <MappingFragment StoreEntitySet="MVIEW_FILTERINSTANCE">
+                <ScalarProperty Name="RUNID" ColumnName="RUNID" />
+                <ScalarProperty Name="FILTERID" ColumnName="FILTERID" />
+                <ScalarProperty Name="SUBFILTERNUM" ColumnName="SUBFILTERNUM" />
+                <ScalarProperty Name="SUBFILTERTYPE" ColumnName="SUBFILTERTYPE" />
+                <ScalarProperty Name="STR_VALUE" ColumnName="STR_VALUE" />
+                <ScalarProperty Name="NUM_VALUE1" ColumnName="NUM_VALUE1" />
+                <ScalarProperty Name="NUM_VALUE2" ColumnName="NUM_VALUE2" />
+                <ScalarProperty Name="DATE_VALUE1" ColumnName="DATE_VALUE1" />
+                <ScalarProperty Name="DATE_VALUE2" ColumnName="DATE_VALUE2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MVIEW_LOG">
+            <EntityTypeMapping TypeName="HotelModel.MVIEW_LOG">
+              <MappingFragment StoreEntitySet="MVIEW_LOG">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FILTERID" ColumnName="FILTERID" />
+                <ScalarProperty Name="RUN_BEGIN" ColumnName="RUN_BEGIN" />
+                <ScalarProperty Name="RUN_END" ColumnName="RUN_END" />
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="MESSAGE" ColumnName="MESSAGE" />
+                <ScalarProperty Name="COMPLETED" ColumnName="COMPLETED" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="ERROR_CODE" ColumnName="ERROR_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MVIEW_RECOMMENDATIONS">
+            <EntityTypeMapping TypeName="HotelModel.MVIEW_RECOMMENDATIONS">
+              <MappingFragment StoreEntitySet="MVIEW_RECOMMENDATIONS">
+                <ScalarProperty Name="RUNID" ColumnName="RUNID" />
+                <ScalarProperty Name="ALL_TABLES" ColumnName="ALL_TABLES" />
+                <ScalarProperty Name="FACT_TABLES" ColumnName="FACT_TABLES" />
+                <ScalarProperty Name="GROUPING_LEVELS" ColumnName="GROUPING_LEVELS" />
+                <ScalarProperty Name="QUERY_TEXT" ColumnName="QUERY_TEXT" />
+                <ScalarProperty Name="RECOMMENDATION_NUMBER" ColumnName="RECOMMENDATION_NUMBER" />
+                <ScalarProperty Name="RECOMMENDED_ACTION" ColumnName="RECOMMENDED_ACTION" />
+                <ScalarProperty Name="MVIEW_OWNER" ColumnName="MVIEW_OWNER" />
+                <ScalarProperty Name="MVIEW_NAME" ColumnName="MVIEW_NAME" />
+                <ScalarProperty Name="STORAGE_IN_BYTES" ColumnName="STORAGE_IN_BYTES" />
+                <ScalarProperty Name="PCT_PERFORMANCE_GAIN" ColumnName="PCT_PERFORMANCE_GAIN" />
+                <ScalarProperty Name="BENEFIT_TO_COST_RATIO" ColumnName="BENEFIT_TO_COST_RATIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MVIEW_WORKLOAD">
+            <EntityTypeMapping TypeName="HotelModel.MVIEW_WORKLOAD">
+              <MappingFragment StoreEntitySet="MVIEW_WORKLOAD">
+                <ScalarProperty Name="WORKLOADID" ColumnName="WORKLOADID" />
+                <ScalarProperty Name="IMPORT_TIME" ColumnName="IMPORT_TIME" />
+                <ScalarProperty Name="QUERYID" ColumnName="QUERYID" />
+                <ScalarProperty Name="APPLICATION" ColumnName="APPLICATION" />
+                <ScalarProperty Name="CARDINALITY" ColumnName="CARDINALITY" />
+                <ScalarProperty Name="RESULTSIZE" ColumnName="RESULTSIZE" />
+                <ScalarProperty Name="LASTUSE" ColumnName="LASTUSE" />
+                <ScalarProperty Name="FREQUENCY" ColumnName="FREQUENCY" />
+                <ScalarProperty Name="OWNER" ColumnName="OWNER" />
+                <ScalarProperty Name="PRIORITY" ColumnName="PRIORITY" />
+                <ScalarProperty Name="QUERY" ColumnName="QUERY" />
+                <ScalarProperty Name="RESPONSETIME" ColumnName="RESPONSETIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCT_PRIVS">
+            <EntityTypeMapping TypeName="HotelModel.PRODUCT_PRIVS">
+              <MappingFragment StoreEntitySet="PRODUCT_PRIVS">
+                <ScalarProperty Name="PRODUCT" ColumnName="PRODUCT" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="ATTRIBUTE" ColumnName="ATTRIBUTE" />
+                <ScalarProperty Name="SCOPE" ColumnName="SCOPE" />
+                <ScalarProperty Name="NUMERIC_VALUE" ColumnName="NUMERIC_VALUE" />
+                <ScalarProperty Name="CHAR_VALUE" ColumnName="CHAR_VALUE" />
+                <ScalarProperty Name="DATE_VALUE" ColumnName="DATE_VALUE" />
+                <ScalarProperty Name="LONG_VALUE" ColumnName="LONG_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROOMS_NOT_CURRENTLY_IN_USE">
+            <EntityTypeMapping TypeName="HotelModel.ROOMS_NOT_CURRENTLY_IN_USE">
+              <MappingFragment StoreEntitySet="ROOMS_NOT_CURRENTLY_IN_USE">
+                <ScalarProperty Name="ROOM_NO" ColumnName="ROOM_NO" />
+                <ScalarProperty Name="ROOM_TYPE" ColumnName="ROOM_TYPE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ADD_ROOM" FunctionName="HotelModel.Store.ADD_ROOM" />
+          <FunctionImportMapping FunctionImportName="ADD_ROOM_RATE" FunctionName="HotelModel.Store.ADD_ROOM_RATE" />
+          <FunctionImportMapping FunctionImportName="ADMIN_LOGIN_CHECK" FunctionName="HotelModel.Store.ADMIN_LOGIN_CHECK" />
+          <FunctionImportMapping FunctionImportName="CANCEL_RESERVATION" FunctionName="HotelModel.Store.CANCEL_RESERVATION" />
+          <FunctionImportMapping FunctionImportName="CHECK_IN" FunctionName="HotelModel.Store.CHECK_IN" />
+          <FunctionImportMapping FunctionImportName="CHECK_OUT" FunctionName="HotelModel.Store.CHECK_OUT" />
+          <FunctionImportMapping FunctionImportName="SP_MAKERESERVATION" FunctionName="HotelModel.Store.SP_MAKERESERVATION" />
+          <FunctionImportMapping FunctionImportName="SP_NORESBONUS" FunctionName="HotelModel.Store.SP_NORESBONUS" />
+          <FunctionImportMapping FunctionImportName="SP_SEARCHAVAILABLEROOM" FunctionName="HotelModel.Store.SP_SEARCHAVAILABLEROOM" />
+          <FunctionImportMapping FunctionImportName="SP_SEARCHEXISTINGCUST" FunctionName="HotelModel.Store.SP_SEARCHEXISTINGCUST" />
+          <FunctionImportMapping FunctionImportName="MAKE_RESERVATION" FunctionName="HotelModel.Store.MAKE_RESERVATION" />
+          <FunctionImportMapping FunctionImportName="SP_SEARCH_EXISTING_CUSTOMER" FunctionName="HotelModel.Store.SP_SEARCH_EXISTING_CUSTOMER" />
+          <EntitySetMapping Name="SIMPLERIIMRATEs">
+            <EntityTypeMapping TypeName="HotelModel.SIMPLERIIMRATE">
+              <MappingFragment StoreEntitySet="SIMPLERIIMRATE">
+                <ScalarProperty Name="RATE" ColumnName="RATE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="ROOM_TYPE" ColumnName="ROOM_TYPE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
