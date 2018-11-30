@@ -5,12 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelReservation_SYS"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000" Loaded="Window_Loaded">
+        Title="MainWindow" Height="600" Width="1200" Loaded="Window_Loaded">
     <Window.Resources>
         <local:AdminsDataSet x:Key="adminsDataSet"/>
         <CollectionViewSource x:Key="aDMINSViewSource" Source="{Binding ADMINS, Source={StaticResource adminsDataSet}}"/>
+        <local:RoomRates_View_DataSet x:Key="roomRates_View_DataSet"/>
+        <CollectionViewSource x:Key="rOOMRATESVIEWViewSource" Source="{Binding ROOMRATESVIEW, Source={StaticResource roomRates_View_DataSet}}"/>
+        <local:CustomersDataSet x:Key="customersDataSet"/>
+        <CollectionViewSource x:Key="cUSTOMERSViewSource" Source="{Binding CUSTOMERS, Source={StaticResource customersDataSet}}"/>
     </Window.Resources>
-    <Grid DataContext="{StaticResource aDMINSViewSource}">
+    <Grid DataContext="{StaticResource aDMINSViewSource}" Margin="0,0,-0.4,0.4">
         <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="161,185,0,0" VerticalAlignment="Top" Width="120" Click="btnSubmit_Click" Height="36" FontSize="16" FontWeight="Bold"/>
         <Label x:Name="lblUsername" Content="UserName" HorizontalAlignment="Left" Margin="28,31,0,0" VerticalAlignment="Top" Height="35" Width="158" FontSize="16"/>
         <Label Content="Password" HorizontalAlignment="Left" Margin="28,96,0,0" VerticalAlignment="Top" Height="41" Width="158" FontSize="16"/>
@@ -23,8 +27,8 @@
         <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="28" Margin="166,319,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" TextChanged="TextBox_TextChanged" FontSize="16"/>
         <TextBox x:Name="txtRate" HorizontalAlignment="Left" Height="28" Margin="166,359,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" FontSize="16"/>
         <Button Content="Add" HorizontalAlignment="Left" Margin="166,421,0,0" VerticalAlignment="Top" Width="120" Height="36" Click="Button_Click" FontSize="16" FontWeight="Bold"/>
-        <Button Content="Search Existing Customer" HorizontalAlignment="Left" Margin="663,31,0,0" VerticalAlignment="Top" Width="302" Height="35" FontSize="16" Click="Button_Click_1"/>
-        <DataGrid x:Name="aDMINSDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="457,300,136.6,70.4" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <Button Content="Search Existing Customer" HorizontalAlignment="Left" Margin="435,30,0,0" VerticalAlignment="Top" Width="302" Height="35" FontSize="16" Click="Button_Click_1"/>
+        <DataGrid x:Name="aDMINSDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="394,301,421.6,69.4" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="aDMIN_IDColumn" Binding="{Binding ADMIN_ID}" Header="ADMIN ID" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="uSERNAMEColumn" Binding="{Binding USERNAME}" Header="USERNAME" Width="SizeToHeader"/>
@@ -39,6 +43,89 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <DataGrid x:Name="rOOMRATESVIEWDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource rOOMRATESVIEWViewSource}}" Margin="394,78,421.6,349.4" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="rOOM_TYPEColumn" Binding="{Binding ROOM_TYPE}" Header="ROOM TYPE" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="dESCRIPTIONColumn" Binding="{Binding DESCRIPTION}" Header="DESCRIPTION" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="rATEColumn" Binding="{Binding RATE}" Header="RATE" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ComboBox HorizontalAlignment="Left" Margin="926,96,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="FORENAME" ItemsSource="{Binding Source={StaticResource cUSTOMERSViewSource}}" SelectedValuePath="CUST_ID"/>
+        <Grid x:Name="grid1" DataContext="{StaticResource cUSTOMERSViewSource}" HorizontalAlignment="Left" Margin="930,146,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="CUST ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="cUST_IDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding CUST_ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <Grid x:Name="grid2" DataContext="{StaticResource cUSTOMERSViewSource}" HorizontalAlignment="Left" Margin="932,190,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Grid x:Name="grid3" DataContext="{StaticResource cUSTOMERSViewSource}" HorizontalAlignment="Left" Margin="955,238,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="DOB:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <DatePicker x:Name="dOBDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" SelectedDate="{Binding DOB, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid x:Name="grid4" DataContext="{StaticResource cUSTOMERSViewSource}" HorizontalAlignment="Left" Margin="943,270,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="EMAIL:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="eMAILTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding EMAIL, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <Grid x:Name="grid5" DataContext="{StaticResource cUSTOMERSViewSource}" HorizontalAlignment="Left" Margin="915,315,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="MOBILE NO:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="mOBILE_NOTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding MOBILE_NO, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <Grid x:Name="grid6" DataContext="{StaticResource cUSTOMERSViewSource}" HorizontalAlignment="Left" Margin="932,356,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="LOYALTY:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="lOYALTYTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding LOYALTY, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <Grid x:Name="grid7" DataContext="{StaticResource cUSTOMERSViewSource}" HorizontalAlignment="Left" Margin="920,195,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="SURNAME:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="sURNAMETextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding SURNAME, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
 
     </Grid>
 </Window>
